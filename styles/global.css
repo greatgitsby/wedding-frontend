@@ -1,0 +1,8 @@
+@font-face {
+  font-family: 'audhistine';
+  src:url('/font/audhistine.woff') format('woff');
+}
+
+.audhistine {
+  font-family: 'audhistine';
+}
