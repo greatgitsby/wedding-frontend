@@ -41,8 +41,21 @@ const typographyTheme = createTheme({
   }
 });
 
+/* Randomize array in-place using Durstenfeld shuffle algorithm */
+const shuffleArray = (array: any[]) => {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
+  }
+}
+
 export default function Index(props: AuthFlowImageProps) {
   const classes = useStyles();
+  const images = props.images;
+
+  shuffleArray(images);
 
   return (
     <Grid container justifyContent="center">
@@ -61,7 +74,7 @@ export default function Index(props: AuthFlowImageProps) {
             className={classes.imageList}
             cols={4}
           >
-            {props.images.map((item, i) => {
+            {images.map((item, i) => {
               const cols = 2;
 
               return (
@@ -74,7 +87,7 @@ export default function Index(props: AuthFlowImageProps) {
         </Box>
         
         <Box sx={{ my: 4 }}>
-          <Button fullWidth variant="contained" color="primary">
+          <Button fullWidth variant="contained" color="primary" href="/">
             Coming Soon
           </Button>
         </Box>
