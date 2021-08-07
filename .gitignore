@@ -125,3 +125,4 @@ amplifytools.xcconfig
 #amplify-do-not-edit-end
 
 out/
+.DS_Store
