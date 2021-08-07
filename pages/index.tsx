@@ -74,7 +74,7 @@ export default function Index(props: AuthFlowImageProps) {
         </Box>
         
         <Box sx={{ my: 4 }}>
-          <Button fullWidth variant="contained" color="primary" href="/">
+          <Button fullWidth variant="contained" color="primary">
             Coming Soon
           </Button>
         </Box>
