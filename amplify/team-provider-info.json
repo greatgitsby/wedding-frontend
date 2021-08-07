@@ -1,15 +1,23 @@
 {
-  "dev": {
-    "awscloudformation": {
-      "AuthRoleName": "amplify-wedding-dev-165648-authRole",
-      "UnauthRoleArn": "arn:aws:iam::066840169158:role/amplify-wedding-dev-165648-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::066840169158:role/amplify-wedding-dev-165648-authRole",
-      "Region": "us-west-2",
-      "DeploymentBucketName": "amplify-wedding-dev-165648-deployment",
-      "UnauthRoleName": "amplify-wedding-dev-165648-unauthRole",
-      "StackName": "amplify-wedding-dev-165648",
-      "StackId": "arn:aws:cloudformation:us-west-2:066840169158:stack/amplify-wedding-dev-165648/f7e0ed70-f711-11eb-8bf1-02a27a30f541",
-      "AmplifyAppId": "d2r283l4d28ugq"
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-wedding-dev-165648-authRole",
+            "UnauthRoleArn": "arn:aws:iam::066840169158:role/amplify-wedding-dev-165648-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::066840169158:role/amplify-wedding-dev-165648-authRole",
+            "Region": "us-west-2",
+            "DeploymentBucketName": "amplify-wedding-dev-165648-deployment",
+            "UnauthRoleName": "amplify-wedding-dev-165648-unauthRole",
+            "StackName": "amplify-wedding-dev-165648",
+            "StackId": "arn:aws:cloudformation:us-west-2:066840169158:stack/amplify-wedding-dev-165648/f7e0ed70-f711-11eb-8bf1-02a27a30f541",
+            "AmplifyAppId": "d2r283l4d28ugq"
+        },
+        "categories": {
+            "hosting": {
+                "amplifyhosting": {
+                    "appId": "d2r283l4d28ugq",
+                    "type": "cicd"
+                }
+            }
+        }
     }
-  }
 }
