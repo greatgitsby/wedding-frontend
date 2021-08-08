@@ -1,12 +1,15 @@
-module.exports = {
-  webpack: (config) => {
-    config.module.rules.push({
-      test: /\.node$/,
-      loader: "node-loader",
-    });
-    
-    config.externals = config.externals || {};
-    config.externals["sharp"] = "commonjs sharp"
-    return config
+const { NextConfig } = require("next/dist/next-server/server/config-shared");
+
+/**
+ * @type {NextConfig}
+ */
+const nextConfig = {
+  reactStrictMode: true,
+  images: {
+    images: {
+      deviceSizes: [640, 750, 828, 1080, 1200, 1920],
+    }
   }
 }
+
+module.exports = nextConfig;

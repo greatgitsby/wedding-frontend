@@ -1,9 +1,10 @@
 import * as React from 'react';
 import Box from '@material-ui/core/Box';
 import Copyright from '../Copyright';
+import PhotoPlug from '../PhotoPlug';
 import ImageList from '@material-ui/core/ImageList';
 import ImageListItem from '@material-ui/core/ImageListItem';
-import { Button, Grid, ThemeProvider, Typography } from '@material-ui/core';
+import { Button, ButtonGroup, Grid, ThemeProvider, Typography } from '@material-ui/core';
 import { Theme, createStyles, makeStyles, createTheme } from '@material-ui/core/styles';
 import { AuthFlowImageProps, getImageProps } from '../Images';
 
@@ -12,6 +13,18 @@ import useMeasure from 'react-use-measure';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
+    buttons: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      '& > *': {
+        margin: theme.spacing(1),
+      },
+    },
+    banner: {
+      textAlign: "center",
+      justifyContent: "center"
+    },
     root: {
       padding: theme.spacing(3, 2),
       height: 200,
@@ -68,10 +81,23 @@ export default function Index(props: AuthFlowImageProps) {
       <Grid item>
         <Box sx={{ my: 10 }}>
           <ThemeProvider theme={typographyTheme}>
-            <Typography variant="h4" align="center">
+            <Typography variant="h3" className={classes.banner}>
               trey + avery
             </Typography>
           </ThemeProvider>
+        </Box>
+        <Box sx={{ my: 4 }} className={classes.buttons}>
+          <ButtonGroup color="secondary" aria-label="">
+            <Button>
+              Details
+            </Button>
+            <Button>
+              Registry
+            </Button>
+            <Button href="/login">
+              RSVP
+            </Button>
+          </ButtonGroup>
         </Box>
 
         <Box sx={{ my: 4 }}>
@@ -99,14 +125,10 @@ export default function Index(props: AuthFlowImageProps) {
             })}
           </ImageList>
         </Box>
-        
-        <Box sx={{ my: 4 }}>
-          <Button fullWidth variant="contained" color="primary" href="/login">
-            View RSVP
-          </Button>
+        <Box sx={{ my: 1 }}>
+          <PhotoPlug />
         </Box>
-      
-        <Box sx={{my: 4 }}>
+        <Box sx={{ my: 4 }}>
           <Copyright />
         </Box>
         
