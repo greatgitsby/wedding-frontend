@@ -84,7 +84,7 @@ export default function Index(props: AuthFlowImageProps) {
             {images.map((item, i) => {
               return (
                 <ImageListItem key={i} cols={1} rows={2}>
-                  <Image src={item.src} placeholder="blur" blurDataURL={item.blurSrc} height={450} width={imageWidth} layout="fixed" objectFit="cover" />
+                  <Image src={item.src} alt="" placeholder="blur" blurDataURL={item.blurSrc} height={450} width={imageWidth} layout="fixed" objectFit="cover" />
                 </ImageListItem>
               );
             })}

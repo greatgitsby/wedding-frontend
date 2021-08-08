@@ -23,9 +23,7 @@ export async function getAuthFlowImageProps() {
     return !f.startsWith(".");
   });
 
-  const completeImages = images.map((f) => baseUrl+f);
-
-  const theImages: any[] = [];
+  const theImages: ImageWithBlurEncoding[] = [];
 
   for (const image of images) {
     const fullPath = basePath + "/" + image;
