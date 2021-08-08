@@ -7,13 +7,9 @@ export interface AuthFlowImageProps {
   images: ImageWithBlurEncoding[];
 }
 
-export function getImages() {
-  
-}
-
-export async function getAuthFlowImageProps() {
+export async function getImageProps() {
   const fs = await import("fs");
-  const sharp = await import("sharp");
+  const Jimp = await import("jimp/es");
 
   const placeholderImgWidth = 20;
   const basePath = "public/img/portraits";
@@ -25,27 +21,29 @@ export async function getAuthFlowImageProps() {
 
   const theImages: ImageWithBlurEncoding[] = [];
 
-  for (const image of images) {
-    const fullPath = basePath + "/" + image;
-    const sharpImage = sharp.default(fullPath);
-    const sharpMetadata = await sharpImage.metadata();
-    
-    if (sharpMetadata.width && sharpMetadata.height) {
-      const imgAspectRatio = sharpMetadata.width / sharpMetadata.height;
-      const placeholderImgHeight = Math.round(placeholderImgWidth / imgAspectRatio);
-      const imgBase64 = await sharpImage
-        .resize(placeholderImgWidth, placeholderImgHeight)
-        .toBuffer()
-        .then(
-          buffer => `data:image/${sharpMetadata.format};base64,${buffer.toString('base64')}`
-        );
+  for (const filename of images) {
+    const fullPath = basePath + "/" + filename;
+    const remoteSrcPath = baseUrl + filename;
 
-      theImages.push({
-        src: baseUrl + image,
-        blurSrc: imgBase64
-      });
-    }
+    const image = await Jimp.default.read(fullPath);
+    
+    const imgAspectRatio = image.getWidth() / image.getHeight();
+    const placeholderImgHeight = Math.round(placeholderImgWidth / imgAspectRatio);
+
+    const imgBase64 = await image
+      .resize(placeholderImgWidth, placeholderImgHeight)
+      .getBufferAsync(image.getMIME())
+      .then(
+        buffer => `data:image/${image.getMIME()};base64,${buffer.toString('base64')}`
+      );
+
+    theImages.push({
+      src: remoteSrcPath,
+      blurSrc: imgBase64
+    });
   }
+
+
 
   return {
     props: {

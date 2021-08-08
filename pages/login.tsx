@@ -14,7 +14,7 @@ import { useForm } from 'react-hook-form';
 import Image from "next/image";
 
 import Copyright from '../src/Copyright';
-import { AuthFlowImageProps, getAuthFlowImageProps } from '../src/Images';
+import { AuthFlowImageProps, getImageProps } from '../src/Images';
 
 interface LoginForm {
   email: string;
@@ -126,4 +126,4 @@ export default function LogIn(props: AuthFlowImageProps) {
   );
 }
 
-export const getStaticProps = getAuthFlowImageProps;
+export const getStaticProps = getImageProps;

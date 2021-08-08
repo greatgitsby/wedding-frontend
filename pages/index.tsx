@@ -5,7 +5,7 @@ import ImageList from '@material-ui/core/ImageList';
 import ImageListItem from '@material-ui/core/ImageListItem';
 import { Button, Grid, ThemeProvider, Typography } from '@material-ui/core';
 import { Theme, createStyles, makeStyles, createTheme } from '@material-ui/core/styles';
-import { AuthFlowImageProps, getAuthFlowImageProps } from '../src/Images';
+import { AuthFlowImageProps, getImageProps } from '../src/Images';
 
 import Image from "next/image";
 
@@ -106,4 +106,4 @@ export default function Index(props: AuthFlowImageProps) {
   );
 }
 
-export const getStaticProps = getAuthFlowImageProps;
+export const getStaticProps = getImageProps;
