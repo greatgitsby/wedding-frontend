@@ -13,8 +13,8 @@ import { useForm } from 'react-hook-form';
 
 import Image from "next/image";
 
-import Copyright from '../src/Copyright';
-import { AuthFlowImageProps, getImageProps } from '../src/Images';
+import Copyright from '../Copyright';
+import { AuthFlowImageProps, getImageProps } from '../Images';
 
 interface SignUpForm {
   email: string;

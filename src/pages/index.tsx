@@ -1,11 +1,11 @@
 import * as React from 'react';
 import Box from '@material-ui/core/Box';
-import Copyright from '../src/Copyright';
+import Copyright from '../Copyright';
 import ImageList from '@material-ui/core/ImageList';
 import ImageListItem from '@material-ui/core/ImageListItem';
 import { Button, Grid, ThemeProvider, Typography } from '@material-ui/core';
 import { Theme, createStyles, makeStyles, createTheme } from '@material-ui/core/styles';
-import { AuthFlowImageProps, getImageProps } from '../src/Images';
+import { AuthFlowImageProps, getImageProps } from '../Images';
 
 import Image from "next/image";
 
@@ -84,7 +84,16 @@ export default function Index(props: AuthFlowImageProps) {
             {images.map((item, i) => {
               return (
                 <ImageListItem key={i} cols={1} rows={2}>
-                  <Image src={item.src} alt="" placeholder="blur" blurDataURL={item.blurSrc} height={450} width={imageWidth} layout="fixed" objectFit="cover" />
+                  <Image 
+                    src={item.src} 
+                    alt="" 
+                    placeholder="blur" 
+                    blurDataURL={item.blurSrc} 
+                    height={450} 
+                    width={imageWidth}
+                    layout="fixed"
+                    objectFit="cover"
+                  />
                 </ImageListItem>
               );
             })}
