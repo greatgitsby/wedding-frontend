@@ -35,7 +35,7 @@ export default function MyApp(props: AppProps) {
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://owen2moen.com/" />
         <meta property="og:description" content="We're getting married!" />
-        <meta property="og:image" content="/img/portraits/DSC_0399-min.jpg" />
+        <meta property="og:image" content="/img/portraits/DSC_0708.jpg" />
       </Head>
       <ThemeProvider theme={theme}>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
