@@ -11,6 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import Link from "@material-ui/core/Link"
 import { makeStyles } from '@material-ui/core/styles';
 import { useForm } from 'react-hook-form';
+import Image from "next/image";
 
 import Copyright from '../src/Copyright';
 import { AuthFlowImageProps, getAuthFlowImageProps } from '../src/Images';
@@ -21,19 +22,14 @@ interface LoginForm {
 }
 
 export default function LogIn(props: AuthFlowImageProps) {
-  const randomImageUrl = props.images[Math.floor(Math.random() * props.images.length)];
+  const randomImage = props.images[Math.floor(Math.random() * props.images.length)];
 
   const useStyles = makeStyles((theme) => ({
     root: {
       height: '100vh',
     },
-    image: {
-      backgroundImage: `url(${randomImageUrl})`,
-      backgroundRepeat: 'no-repeat',
-      backgroundColor:
-        theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
+    imageBackground: {
+      position: "relative"
     },
     paper: {
       margin: theme.spacing(8, 4),
@@ -65,7 +61,9 @@ export default function LogIn(props: AuthFlowImageProps) {
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
-      <Grid item xs={false} sm={4} md={7} className={classes.image} />
+      <Grid item xs={false} sm={4} md={7} className={classes.imageBackground}>
+        <Image src={randomImage.src} blurDataURL={randomImage.blurSrc} placeholder="blur" layout="fill" objectFit="cover" />
+      </Grid>
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
