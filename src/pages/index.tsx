@@ -8,6 +8,7 @@ import { Theme, createStyles, makeStyles, createTheme } from '@material-ui/core/
 import { AuthFlowImageProps, getImageProps } from '../Images';
 
 import Image from "next/image";
+import useMeasure from 'react-use-measure';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -19,16 +20,17 @@ const useStyles = makeStyles((theme: Theme) =>
       justifyContent: "center"
     },
     imageList: {
+      transform: 'translateZ(0)',
       [theme.breakpoints.down('sm')]: {
         width: 350,
         height: 500,
       },
       [theme.breakpoints.up('md')]: {
-        width: 450,
+        width: 600,
         height: 600,
       },
       [theme.breakpoints.up('lg')]: {
-        width: 900,
+        width: 1000,
         height: 900,
       }
     },
@@ -43,32 +45,30 @@ const typographyTheme = createTheme({
   }
 });
 
-/* Randomize array in-place using Durstenfeld shuffle algorithm */
-const shuffleArray = (array: any[]) => {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    const temp = array[i];
-    array[i] = array[j];
-    array[j] = temp;
-  }
-}
-
 export default function Index(props: AuthFlowImageProps) {
   const classes = useStyles();
   const images = props.images;
+  const [ref, bounds] = useMeasure();
 
-  const numImageColumns = 4;
   const pixelGap = 6;
-  const imageWidth = (900 - (pixelGap * numImageColumns)) / numImageColumns;
 
-  shuffleArray(images);
+  let numImageColumns = 5;
+  let rowHeight: number | "auto" = "auto";
+
+  if (bounds.width == 600) {
+    numImageColumns = 2;
+    rowHeight = 300;
+  } else if (bounds.width == 350) {
+    numImageColumns = 1;
+    rowHeight = 400;
+  }
 
   return (
     <Grid container justifyContent="center">
       <Grid item>
         <Box sx={{ my: 10 }}>
           <ThemeProvider theme={typographyTheme}>
-            <Typography variant="h3" align="center">
+            <Typography variant="h4" align="center">
               trey + avery
             </Typography>
           </ThemeProvider>
@@ -76,7 +76,8 @@ export default function Index(props: AuthFlowImageProps) {
 
         <Box sx={{ my: 4 }}>
           <ImageList
-            rowHeight={200}
+            innerRef={ref}
+            rowHeight={rowHeight}
             className={classes.imageList}
             gap={pixelGap}
             cols={numImageColumns}
@@ -88,11 +89,10 @@ export default function Index(props: AuthFlowImageProps) {
                     src={item.src} 
                     alt="" 
                     placeholder="blur" 
-                    blurDataURL={item.blurSrc} 
-                    height={450} 
-                    width={imageWidth}
-                    layout="fixed"
+                    blurDataURL={item.blurSrc}
+                    layout="fill"
                     objectFit="cover"
+                    objectPosition="50% 0%"
                   />
                 </ImageListItem>
               );
