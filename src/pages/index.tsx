@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme: Theme) =>
       },
       [theme.breakpoints.up('lg')]: {
         width: 1000,
-        height: 900,
+        height: 925,
       }
     },
   }),
@@ -66,15 +66,19 @@ export default function Index(props: AuthFlowImageProps) {
   const pixelGap = 6;
 
   let numImageColumns = 5;
-  let rowHeight: number | "auto" = "auto";
+  let rowsPerImage = 2;
+
+  let imageHeight = 300;
 
   if (bounds.width == 600) {
     numImageColumns = 2;
-    rowHeight = 300;
+    imageHeight = 500;
   } else if (bounds.width == 350) {
     numImageColumns = 1;
-    rowHeight = 400;
+    imageHeight = 500;
   }
+
+  let imageWidth = ((bounds.width - (pixelGap * numImageColumns)) / (numImageColumns));
 
   return (
     <Grid container justifyContent="center">
@@ -103,20 +107,22 @@ export default function Index(props: AuthFlowImageProps) {
         <Box sx={{ my: 4 }}>
           <ImageList
             innerRef={ref}
-            rowHeight={rowHeight}
+            rowHeight={imageHeight/rowsPerImage}
             className={classes.imageList}
             gap={pixelGap}
             cols={numImageColumns}
           >
             {images.map((item, i) => {
               return (
-                <ImageListItem key={i} cols={1} rows={2}>
+                <ImageListItem key={i} cols={1} rows={rowsPerImage}>
                   <Image 
                     src={item.src} 
                     alt="" 
                     placeholder="blur" 
                     blurDataURL={item.blurSrc}
-                    layout="fill"
+                    layout="fixed"
+                    width={imageWidth}
+                    height={imageHeight}
                     objectFit="cover"
                     objectPosition="50% 0%"
                   />
