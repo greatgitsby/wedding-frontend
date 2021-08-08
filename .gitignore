@@ -103,6 +103,10 @@ dist
 # TernJS port file
 .tern-port
 
+
+out/
+.DS_Store
+
 #amplify-do-not-edit-begin
 amplify/\#current-cloud-backend
 amplify/.config/local-*
@@ -123,6 +127,3 @@ amplify-gradle-config.json
 amplifytools.xcconfig
 .secret-*
 #amplify-do-not-edit-end
-
-out/
-.DS_Store
