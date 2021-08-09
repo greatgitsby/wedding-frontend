@@ -10,6 +10,7 @@ import { AuthFlowImageProps, getImageProps } from '../Images';
 
 import Image from "next/image";
 import useMeasure from 'react-use-measure';
+import { Variant } from '@material-ui/core/styles/createTypography';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -65,6 +66,7 @@ export default function Index(props: AuthFlowImageProps) {
 
   const pixelGap = 6;
 
+  let headerSize: Variant = "h3";
   let numImageColumns = 5;
   let rowsPerImage = 2;
 
@@ -76,6 +78,7 @@ export default function Index(props: AuthFlowImageProps) {
   } else if (bounds.width == 350) {
     numImageColumns = 1;
     imageHeight = 500;
+    headerSize = "h4";
   }
 
   let imageWidth = ((bounds.width - (pixelGap * numImageColumns)) / (numImageColumns));
@@ -85,7 +88,7 @@ export default function Index(props: AuthFlowImageProps) {
       <Grid item>
         <Box sx={{ my: 10 }}>
           <ThemeProvider theme={typographyTheme}>
-            <Typography variant="h3" className={classes.banner}>
+            <Typography variant={headerSize} className={classes.banner}>
               trey + avery
             </Typography>
           </ThemeProvider>
