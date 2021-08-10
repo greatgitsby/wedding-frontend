@@ -14,6 +14,13 @@ export default class MyDocument extends Document {
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
           />
+          <link
+            rel="preload"
+            href="/font/audhistine.woff"
+            as="font"
+            crossOrigin=""
+            type="font/woff"
+          />
         </Head>
         <body>
           <Main />
