@@ -1,15 +1,46 @@
 interface ImageWithBlurEncoding {
-  src: string;
-  blurSrc: string;
+  fileName: string;
+  relativePath: string;
+  width: number;
+  height: number;
+  imgBase64: string;
 }
 
-function shuffleArray(array: any[]) {
-  for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
+async function generateImageMetadata(basePath: string, placeholderWidth: number, images: string[]): Promise<ImageWithBlurEncoding[]> {
+  const sharp = (await import("sharp")).default;
+  const path = await import("path");
+
+  const theImages: ImageWithBlurEncoding[] = [];
+
+  for (const filename of images) {
+    const fullPath = basePath + "/" + filename;
+
+    const sharpImg = sharp(fullPath);
+    const meta = await sharpImg.metadata();
+
+    const imgAspectRatio = (meta.width || 1) / (meta.height || 1);
+    const placeholderImgHeight = Math.round(placeholderWidth / imgAspectRatio);
+
+    const imgBase64 = await sharpImg
+      .resize(placeholderWidth, placeholderImgHeight)
+      .toBuffer()
+      .then(
+        buffer => `data:image/${meta.format};base64,${buffer.toString('base64')}`
+      );
+ 
+    theImages.push({
+      fileName: path.basename(fullPath),
+      // Strip public prefix, /public is / in Nextjs runtime environment
+      relativePath: path
+        .relative(process.cwd(), fullPath)
+        .substring('public'.length),
+      width: meta.width || 1,
+      height: meta.height || 1,
+      imgBase64
+    });
   }
 
-  return array;
+  return theImages;
 }
 
 export interface AuthFlowImageProps {
@@ -18,43 +49,29 @@ export interface AuthFlowImageProps {
 
 export async function getImageProps() {
   const fs = await import("fs");
-  const Jimp = await import("jimp/es");
+  const md5 = (await import("md5")).default;
 
-  const placeholderImgWidth = 20;
   const basePath = "public/img/portraits";
-  const baseUrl = "/img/portraits/";
+  const placeholderWidth = 20;
+  let theImages: ImageWithBlurEncoding[] = [];
 
   const images: string[] = fs.readdirSync(basePath).filter((f) => {
     return !f.startsWith(".");
-  });
+  }).sort();
 
-  const theImages: ImageWithBlurEncoding[] = [];
+  const hash = md5(images.join());
+  const hashFile = "public/"+hash+".json";
 
-  for (const filename of images) {
-    const fullPath = basePath + "/" + filename;
-    const remoteSrcPath = baseUrl + filename;
-
-    const image = await Jimp.default.read(fullPath);
-    
-    const imgAspectRatio = image.getWidth() / image.getHeight();
-    const placeholderImgHeight = Math.round(placeholderImgWidth / imgAspectRatio);
-
-    const imgBase64 = await image
-      .resize(placeholderImgWidth, placeholderImgHeight)
-      .getBufferAsync(image.getMIME())
-      .then(
-        buffer => `data:image/${image.getMIME()};base64,${buffer.toString('base64')}`
-      );
-
-    theImages.push({
-      src: remoteSrcPath,
-      blurSrc: imgBase64
-    });
+  if (!fs.existsSync(hashFile)) {
+    theImages = await generateImageMetadata(basePath, placeholderWidth, images);
+    fs.writeFileSync(hashFile, JSON.stringify(theImages, null, 2));
+  } else {
+    theImages = JSON.parse(fs.readFileSync(hashFile).toString());
   }
 
   return {
     props: {
-      images: shuffleArray(theImages),
+      images: theImages,
     },
   };
 }

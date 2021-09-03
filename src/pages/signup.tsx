@@ -11,46 +11,44 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import { useForm } from 'react-hook-form';
 
-import Image from "next/image";
-
 import Copyright from '../Copyright';
 import { AuthFlowImageProps, getImageProps } from '../Images';
+import Image from "next/image";
 
 interface SignUpForm {
   email: string;
   password: string;
   access_key: string;
-}
+};
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    height: '100vh',
+  },
+  imageBackground: {
+    position: "relative"
+  },
+  paper: {
+    margin: theme.spacing(8, 4),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main,
+  },
+  form: {
+    width: '100%', // Fix IE 11 issue.
+    marginTop: theme.spacing(1),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+}));
 
 export default function SignUp(props: AuthFlowImageProps) {
-  const randomImage = props.images[Math.floor(Math.random() * props.images.length)];
-
-  const useStyles = makeStyles((theme) => ({
-    root: {
-      height: '100vh',
-    },
-    imageBackground: {
-      position: "relative"
-    },
-    paper: {
-      margin: theme.spacing(8, 4),
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-    },
-    avatar: {
-      margin: theme.spacing(1),
-      backgroundColor: theme.palette.secondary.main,
-    },
-    form: {
-      width: '100%', // Fix IE 11 issue.
-      marginTop: theme.spacing(1),
-    },
-    submit: {
-      margin: theme.spacing(3, 0, 2),
-    },
-  }));
-
+  const randomImage = props.images[0];
 
   const classes = useStyles();
 
@@ -65,7 +63,7 @@ export default function SignUp(props: AuthFlowImageProps) {
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
       <Grid item xs={false} sm={4} md={7} className={classes.imageBackground}>
-        <Image src={randomImage.src} alt="" blurDataURL={randomImage.blurSrc} placeholder="blur" layout="fill" objectFit="cover" />
+        <Image src={randomImage.relativePath} alt="" blurDataURL={randomImage.imgBase64} placeholder="blur" layout="fill" objectFit="cover" />
       </Grid>
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
