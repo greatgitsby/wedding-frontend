@@ -1,14 +1,16 @@
+import * as React from 'react';
 import Box from '@material-ui/core/Box';
 import Copyright from '../Copyright';
 import PhotoPlug from '../PhotoPlug';
 import ImageList from '@material-ui/core/ImageList';
 import ImageListItem from '@material-ui/core/ImageListItem';
-import { Grid, Typography, useMediaQuery } from '@material-ui/core';
-import { Theme, createStyles, makeStyles, useTheme } from '@material-ui/core/styles';
+import { Grid, ThemeProvider, Typography } from '@material-ui/core';
+import { Theme, createStyles, makeStyles, createTheme } from '@material-ui/core/styles';
 import { AuthFlowImageProps, getImageProps } from '../Images';
 
+import Image from "next/image";
+import useMeasure from 'react-use-measure';
 import { Variant } from '@material-ui/core/styles/createTypography';
-import Image from 'next/image';
 import HeaderButtons from '../HeaderButtons';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -17,11 +19,6 @@ const useStyles = makeStyles((theme: Theme) =>
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
-      '& > *': {
-        margin: theme.spacing(1),
-      },
-    },
-    headerButtons: {
       '& > *': {
         margin: theme.spacing(1),
       },
@@ -39,77 +36,63 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     imageList: {
       transform: 'translateZ(0)',
-      [theme.breakpoints.down('xs')]: {
-        width: 400,
-        height: 700,
-      },
-      [theme.breakpoints.up('sm')]: {
-        width: 600,
+      [theme.breakpoints.down('sm')]: {
+        width: 350,
         height: 500,
       },
       [theme.breakpoints.up('md')]: {
-        width: 800,
+        width: 600,
         height: 600,
       },
       [theme.breakpoints.up('lg')]: {
-        width: 1200,
-        height: 1000,
-      },
-      [theme.breakpoints.up('xl')]: {
-        width: 1200,
-        height: 1000,
+        width: 1000,
+        height: 925,
       }
     },
   }),
 );
 
+const typographyTheme = createTheme({
+  typography: {
+    fontFamily: [
+      "audhistine"
+    ].join(",")
+  }
+});
+
 export default function Index(props: AuthFlowImageProps) {
   const classes = useStyles();
-  const theme = useTheme();
   const images = props.images;
-
-  const isExtraSmallWidth = useMediaQuery(theme.breakpoints.up("xs"));
-  const isSmallWidth = useMediaQuery(theme.breakpoints.up("sm"));
-  const isMediumWidth = useMediaQuery(theme.breakpoints.up("md"));
-  const isLargeWidth = useMediaQuery(theme.breakpoints.up("lg"));
+  const [ref, bounds] = useMeasure();
 
   const pixelGap = 6;
-  let rowsPerImage = 2;
-  let containerWidth = 0;
 
-  // Default values for XL
   let headerSize: Variant = "h3";
-  let imageHeight = 800;
-  let numImageColumns = 4;
+  let numImageColumns = 5;
+  let rowsPerImage = 2;
 
-  if (isLargeWidth) {
-    containerWidth = theme.breakpoints.values["lg"];
-  } else if (isMediumWidth) {
-    containerWidth = theme.breakpoints.values["md"];
-    numImageColumns = 4;
-  } else if (isSmallWidth) {
-    containerWidth = theme.breakpoints.values["sm"];
-    numImageColumns = 3;
-    headerSize = "h4";
+  let imageHeight = 300;
+
+  if (bounds.width == 600) {
+    numImageColumns = 2;
     imageHeight = 500;
-  } else if (isExtraSmallWidth) {
-    containerWidth = theme.breakpoints.values["xs"];
+  } else if (bounds.width == 350) {
     numImageColumns = 1;
+    imageHeight = 500;
     headerSize = "h4";
-    imageHeight = 600;
   }
 
-  let imageWidth = (containerWidth * rowsPerImage) / numImageColumns;
-
-  console.log(imageWidth, imageHeight);
+  let imageWidth = ((bounds.width - (pixelGap * numImageColumns)) / (numImageColumns));
 
   return (
     <Grid container justifyContent="center">
       <Grid item>
         <Box sx={{ my: 10 }}>
-          <Typography variant={headerSize} className={classes.banner}>
-            trey + avery
-          </Typography>
+          <ThemeProvider theme={typographyTheme}>
+            <Typography variant={headerSize} className={classes.banner}>
+              trey + avery
+            </Typography>
+          </ThemeProvider>
         </Box>
         <Box sx={{ my: 4 }} className={classes.buttons}>
           <HeaderButtons />
@@ -117,20 +100,18 @@ export default function Index(props: AuthFlowImageProps) {
 
         <Box sx={{ my: 4 }}>
           <ImageList
+            innerRef={ref}
             rowHeight={imageHeight/rowsPerImage}
             className={classes.imageList}
             gap={pixelGap}
             cols={numImageColumns}
           >
             {images.map((item, i) => {
-              item.width = imageWidth;
-              item.height = imageHeight;
-              
               return (
                 <ImageListItem key={i} cols={1} rows={rowsPerImage}>
                   <Image 
                     src={item.relativePath} 
-                    alt="" 
+                    alt=""
                     placeholder="blur" 
                     blurDataURL={item.imgBase64}
                     layout="fixed"
