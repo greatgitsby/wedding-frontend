@@ -10,7 +10,7 @@ const theme = createTheme({
       dark: '#648dae'
     },
     secondary: {
-      main: '#f48fb1',
+      main: '#cf7694',
     },
     error: {
       main: red.A400,

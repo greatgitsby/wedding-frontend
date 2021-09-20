@@ -3,7 +3,7 @@ import { Button, ButtonGroup } from '@material-ui/core';
 export default function HeaderButtons() {
   return (
     <>
-      <ButtonGroup color="secondary" aria-label="">
+      <ButtonGroup color="secondary" aria-label="" size="large">
         <Button href="/">
           Gallery
         </Button>
@@ -14,9 +14,9 @@ export default function HeaderButtons() {
           Registry
         </Button>
       </ButtonGroup>
-      <Button href="/login" color="secondary" variant="outlined">
+      {/* <Button href="/#" color="secondary" variant="outlined">
         RSVP
-      </Button>
+      </Button> */}
     </>
   );
 }

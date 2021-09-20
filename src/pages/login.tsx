@@ -105,7 +105,7 @@ export default function LogIn(props: AuthFlowImageProps) {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="/forgot" variant="body2">
+                <Link href="#" variant="body2">
                   Forgot password?
                 </Link>
               </Grid>

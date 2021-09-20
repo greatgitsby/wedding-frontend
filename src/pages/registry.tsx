@@ -1,7 +1,7 @@
 import Box from '@material-ui/core/Box';
 import Copyright from '../Copyright';
 import { Button, Grid, Typography } from '@material-ui/core';
-import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
+import { Theme, createStyles, makeStyles, createTheme , ThemeProvider } from '@material-ui/core/styles';
 import { Variant } from '@material-ui/core/styles/createTypography';
 
 import Card from '@material-ui/core/Card';
@@ -10,6 +10,9 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import HeaderButtons from '../HeaderButtons';
+
+import Cb2 from "../../public/img/cb2.png";
+import Target from "../../public/img/target.jpg";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -43,36 +46,30 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
+const typographyTheme = createTheme({
+  typography: {
+    fontFamily: [
+      "audhistine"
+    ].join(",")
+  }
+});
+
 export default function Details() {
   const classes = useStyles();
   const registryItems = [
     {
       title: "CB2",
-      description: "Description goes here",
-      href: "https://www.google.com",
-      image: "https://d3ui957tjb5bqd.cloudfront.net/uploads/2016/01/cb2-old.jpg",
-      imageAlt: ""
+      description: "View our CB2 home registry by clicking the button below!",
+      href: "#",
+      image: Cb2.src,
+      imageAlt: "CB2 logo"
     },
     {
-      title: "CB2",
-      description: "Description goes here",
-      href: "https://www.google.com",
-      image: "https://d3ui957tjb5bqd.cloudfront.net/uploads/2016/01/cb2-old.jpg",
-      imageAlt: ""
-    },
-    {
-      title: "CB2",
-      description: "Description goes here",
-      href: "https://www.google.com",
-      image: "https://d3ui957tjb5bqd.cloudfront.net/uploads/2016/01/cb2-old.jpg",
-      imageAlt: ""
-    },
-    {
-      title: "CB2",
-      description: "Description goes here",
-      href: "https://www.google.com",
-      image: "https://d3ui957tjb5bqd.cloudfront.net/uploads/2016/01/cb2-old.jpg",
-      imageAlt: ""
+      title: "Target",
+      description: "View our Target registry by clicking the button below!",
+      href: "#",
+      image: Target.src,
+      imageAlt: "Target logo"
     }
   ]
 
@@ -82,9 +79,11 @@ export default function Details() {
     <Grid container justifyContent="center">
       <Grid item>
         <Box sx={{ my: 10 }}>
-          <Typography variant={headerSize} className={classes.banner}>
-            trey + avery
-          </Typography>
+          <ThemeProvider theme={typographyTheme}>
+            <Typography variant={headerSize} className={classes.banner}>
+              trey + avery
+            </Typography>
+          </ThemeProvider>
         </Box>
         <Box sx={{ my: 5 }} className={classes.buttons}>
           <HeaderButtons />
@@ -110,7 +109,7 @@ export default function Details() {
                   </CardContent>
                 </CardActionArea>
                 <CardActions>
-                  <Button size="small" color="primary" href={item.href}>
+                  <Button size="small" color="primary" href={item.href} target="_blank">
                     View
                   </Button>
                 </CardActions>

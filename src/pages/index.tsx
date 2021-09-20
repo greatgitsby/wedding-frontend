@@ -79,7 +79,6 @@ export default function Index(props: AuthFlowImageProps) {
   } else if (bounds.width == 350) {
     numImageColumns = 1;
     imageHeight = 500;
-    headerSize = "h4";
   }
 
   let imageWidth = ((bounds.width - (pixelGap * numImageColumns)) / (numImageColumns));
@@ -87,6 +86,7 @@ export default function Index(props: AuthFlowImageProps) {
   return (
     <Grid container justifyContent="center">
       <Grid item>
+
         <Box sx={{ my: 10 }}>
           <ThemeProvider theme={typographyTheme}>
             <Typography variant={headerSize} className={classes.banner}>
@@ -94,6 +94,7 @@ export default function Index(props: AuthFlowImageProps) {
             </Typography>
           </ThemeProvider>
         </Box>
+
         <Box sx={{ my: 4 }} className={classes.buttons}>
           <HeaderButtons />
         </Box>
@@ -109,10 +110,10 @@ export default function Index(props: AuthFlowImageProps) {
             {images.map((item, i) => {
               return (
                 <ImageListItem key={i} cols={1} rows={rowsPerImage}>
-                  <Image 
-                    src={item.relativePath} 
+                  <Image
+                    src={item.relativePath}
                     alt=""
-                    placeholder="blur" 
+                    placeholder="blur"
                     blurDataURL={item.imgBase64}
                     layout="fixed"
                     width={imageWidth}
@@ -125,13 +126,15 @@ export default function Index(props: AuthFlowImageProps) {
             })}
           </ImageList>
         </Box>
+
         <Box sx={{ my: 1 }}>
           <PhotoPlug />
         </Box>
+
         <Box sx={{ my: 4 }}>
           <Copyright />
         </Box>
-        
+
       </Grid>
     </Grid>
   );
