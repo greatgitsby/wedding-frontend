@@ -6,7 +6,16 @@ interface ImageWithBlurEncoding {
   imgBase64: string;
 }
 
-async function generateImageMetadata(basePath: string, placeholderWidth: number, images: string[]): Promise<ImageWithBlurEncoding[]> {
+export interface AuthFlowImageProps {
+  images: ImageWithBlurEncoding[];
+}
+
+async function generateImageMetadata(
+  basePath: string,
+  placeholderWidth: number,
+  images: string[]
+): Promise<ImageWithBlurEncoding[]> {
+
   const sharp = (await import("sharp")).default;
   const path = await import("path");
 
@@ -14,13 +23,10 @@ async function generateImageMetadata(basePath: string, placeholderWidth: number,
 
   for (const filename of images) {
     const fullPath = basePath + "/" + filename;
-
     const sharpImg = sharp(fullPath);
     const meta = await sharpImg.metadata();
-
     const imgAspectRatio = (meta.width || 1) / (meta.height || 1);
     const placeholderImgHeight = Math.round(placeholderWidth / imgAspectRatio);
-
     const imgBase64 = await sharpImg
       .resize(placeholderWidth, placeholderImgHeight)
       .toBuffer()
@@ -41,10 +47,6 @@ async function generateImageMetadata(basePath: string, placeholderWidth: number,
   }
 
   return theImages;
-}
-
-export interface AuthFlowImageProps {
-  images: ImageWithBlurEncoding[];
 }
 
 export async function getImageProps() {
