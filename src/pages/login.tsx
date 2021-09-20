@@ -21,35 +21,34 @@ interface LoginForm {
   password: string;
 }
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    height: '100vh',
+  },
+  imageBackground: {
+    position: "relative",
+  },
+  paper: {
+    margin: theme.spacing(8, 4),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main,
+  },
+  form: {
+    width: '100%', // Fix IE 11 issue.
+    marginTop: theme.spacing(1),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+}));
+
 export default function LogIn(props: AuthFlowImageProps) {
-  const randomImage = props.images[Math.floor(Math.random() * props.images.length)];
-
-  const useStyles = makeStyles((theme) => ({
-    root: {
-      height: '100vh',
-    },
-    imageBackground: {
-      position: "relative"
-    },
-    paper: {
-      margin: theme.spacing(8, 4),
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-    },
-    avatar: {
-      margin: theme.spacing(1),
-      backgroundColor: theme.palette.secondary.main,
-    },
-    form: {
-      width: '100%', // Fix IE 11 issue.
-      marginTop: theme.spacing(1),
-    },
-    submit: {
-      margin: theme.spacing(3, 0, 2),
-    },
-  }));
-
+  const randomImage = props.images[0];
   const classes = useStyles();
   const { register, handleSubmit } = useForm();
 
@@ -62,7 +61,7 @@ export default function LogIn(props: AuthFlowImageProps) {
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
       <Grid item xs={false} sm={4} md={7} className={classes.imageBackground}>
-        <Image src={randomImage.src} alt="" blurDataURL={randomImage.blurSrc} placeholder="blur" layout="fill" objectFit="cover" />
+        <Image src={randomImage.relativePath} alt="" blurDataURL={randomImage.imgBase64} placeholder="blur" layout="fill" objectFit="cover" />
       </Grid>
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
@@ -106,7 +105,7 @@ export default function LogIn(props: AuthFlowImageProps) {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="/forgot" variant="body2">
+                <Link href="#" variant="body2">
                   Forgot password?
                 </Link>
               </Grid>

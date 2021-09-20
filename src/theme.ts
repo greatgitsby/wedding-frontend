@@ -10,10 +10,19 @@ const theme = createTheme({
       dark: '#648dae'
     },
     secondary: {
-      main: '#f48fb1',
+      main: '#cf7694',
     },
     error: {
       main: red.A400,
+    },
+  },
+  breakpoints: {
+    values: {
+      xs: 300,
+      sm: 600,
+      md: 960,
+      lg: 1280,
+      xl: 1920,
     },
   },
 });

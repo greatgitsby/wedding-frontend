@@ -12,6 +12,9 @@
             "AmplifyAppId": "d5t0mc025oijq"
         },
         "categories": {
+            "auth": {
+                "weddingac862e82": {}
+            },
             "hosting": {
                 "amplifyhosting": {
                     "appId": "d5t0mc025oijq",

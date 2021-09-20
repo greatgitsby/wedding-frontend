@@ -4,13 +4,14 @@ import Copyright from '../Copyright';
 import PhotoPlug from '../PhotoPlug';
 import ImageList from '@material-ui/core/ImageList';
 import ImageListItem from '@material-ui/core/ImageListItem';
-import { Button, ButtonGroup, Grid, ThemeProvider, Typography } from '@material-ui/core';
+import { Grid, ThemeProvider, Typography } from '@material-ui/core';
 import { Theme, createStyles, makeStyles, createTheme } from '@material-ui/core/styles';
 import { AuthFlowImageProps, getImageProps } from '../Images';
 
 import Image from "next/image";
 import useMeasure from 'react-use-measure';
 import { Variant } from '@material-ui/core/styles/createTypography';
+import HeaderButtons from '../HeaderButtons';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -78,7 +79,6 @@ export default function Index(props: AuthFlowImageProps) {
   } else if (bounds.width == 350) {
     numImageColumns = 1;
     imageHeight = 500;
-    headerSize = "h4";
   }
 
   let imageWidth = ((bounds.width - (pixelGap * numImageColumns)) / (numImageColumns));
@@ -86,6 +86,7 @@ export default function Index(props: AuthFlowImageProps) {
   return (
     <Grid container justifyContent="center">
       <Grid item>
+
         <Box sx={{ my: 10 }}>
           <ThemeProvider theme={typographyTheme}>
             <Typography variant={headerSize} className={classes.banner}>
@@ -93,18 +94,9 @@ export default function Index(props: AuthFlowImageProps) {
             </Typography>
           </ThemeProvider>
         </Box>
+
         <Box sx={{ my: 4 }} className={classes.buttons}>
-          <ButtonGroup color="secondary" aria-label="">
-            <Button>
-              Details
-            </Button>
-            <Button>
-              Registry
-            </Button>
-            <Button href="/login">
-              RSVP
-            </Button>
-          </ButtonGroup>
+          <HeaderButtons />
         </Box>
 
         <Box sx={{ my: 4 }}>
@@ -118,11 +110,11 @@ export default function Index(props: AuthFlowImageProps) {
             {images.map((item, i) => {
               return (
                 <ImageListItem key={i} cols={1} rows={rowsPerImage}>
-                  <Image 
-                    src={item.src} 
-                    alt="" 
-                    placeholder="blur" 
-                    blurDataURL={item.blurSrc}
+                  <Image
+                    src={item.relativePath}
+                    alt=""
+                    placeholder="blur"
+                    blurDataURL={item.imgBase64}
                     layout="fixed"
                     width={imageWidth}
                     height={imageHeight}
@@ -134,13 +126,15 @@ export default function Index(props: AuthFlowImageProps) {
             })}
           </ImageList>
         </Box>
+
         <Box sx={{ my: 1 }}>
           <PhotoPlug />
         </Box>
+
         <Box sx={{ my: 4 }}>
           <Copyright />
         </Box>
-        
+
       </Grid>
     </Grid>
   );
