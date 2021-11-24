@@ -2,11 +2,9 @@ import * as React from 'react';
 import Box from '@material-ui/core/Box';
 import Copyright from '../Copyright';
 import PhotoPlug from '../PhotoPlug';
-import ImageList from '@material-ui/core/ImageList';
 import { Grid, ThemeProvider, Typography } from '@material-ui/core';
 import { Theme, createStyles, makeStyles, createTheme } from '@material-ui/core/styles';
 
-import useMeasure from 'react-use-measure';
 import { Variant } from '@material-ui/core/styles/createTypography';
 import HeaderButtons from '../HeaderButtons';
 
@@ -59,23 +57,7 @@ const typographyTheme = createTheme({
 
 export default function Index() {
   const classes = useStyles();
-  const [ref, bounds] = useMeasure();
-
-  const pixelGap = 6;
-
-  let headerSize: Variant = "h3";
-  let numImageColumns = 5;
-  let rowsPerImage = 2;
-
-  let imageHeight = 300;
-
-  if (bounds.width == 600) {
-    numImageColumns = 2;
-    imageHeight = 500;
-  } else if (bounds.width == 350) {
-    numImageColumns = 1;
-    imageHeight = 500;
-  }
+  const headerSize: Variant = "h3";
 
   return (
     <Grid container justifyContent="center">
@@ -94,14 +76,9 @@ export default function Index() {
         </Box>
 
         <Box sx={{ my: 4 }}>
-          <ImageList
-            innerRef={ref}
-            rowHeight={imageHeight/rowsPerImage}
-            className={classes.imageList}
-            gap={pixelGap}
-            cols={numImageColumns}
-          >
-          </ImageList>
+          <Typography align="center">
+            {"Coming soon."}
+          </Typography>
         </Box>
 
         <Box sx={{ my: 1 }}>
