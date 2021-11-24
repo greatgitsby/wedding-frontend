@@ -3,12 +3,9 @@ import Box from '@material-ui/core/Box';
 import Copyright from '../Copyright';
 import PhotoPlug from '../PhotoPlug';
 import ImageList from '@material-ui/core/ImageList';
-import ImageListItem from '@material-ui/core/ImageListItem';
 import { Grid, ThemeProvider, Typography } from '@material-ui/core';
 import { Theme, createStyles, makeStyles, createTheme } from '@material-ui/core/styles';
-import { AuthFlowImageProps, getImageProps } from '../Images';
 
-import Image from "next/image";
 import useMeasure from 'react-use-measure';
 import { Variant } from '@material-ui/core/styles/createTypography';
 import HeaderButtons from '../HeaderButtons';
@@ -60,9 +57,8 @@ const typographyTheme = createTheme({
   }
 });
 
-export default function Index(props: AuthFlowImageProps) {
+export default function Index() {
   const classes = useStyles();
-  const images = props.images;
   const [ref, bounds] = useMeasure();
 
   const pixelGap = 6;
@@ -80,8 +76,6 @@ export default function Index(props: AuthFlowImageProps) {
     numImageColumns = 1;
     imageHeight = 500;
   }
-
-  let imageWidth = ((bounds.width - (pixelGap * numImageColumns)) / (numImageColumns));
 
   return (
     <Grid container justifyContent="center">
@@ -107,23 +101,6 @@ export default function Index(props: AuthFlowImageProps) {
             gap={pixelGap}
             cols={numImageColumns}
           >
-            {images.map((item, i) => {
-              return (
-                <ImageListItem key={i} cols={1} rows={rowsPerImage}>
-                  <Image
-                    src={item.relativePath}
-                    alt=""
-                    placeholder="blur"
-                    blurDataURL={item.imgBase64}
-                    layout="fixed"
-                    width={imageWidth}
-                    height={imageHeight}
-                    objectFit="cover"
-                    objectPosition="50% 0%"
-                  />
-                </ImageListItem>
-              );
-            })}
           </ImageList>
         </Box>
 
@@ -139,5 +116,3 @@ export default function Index(props: AuthFlowImageProps) {
     </Grid>
   );
 }
-
-export const getStaticProps = getImageProps;

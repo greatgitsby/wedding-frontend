@@ -1,18 +1,12 @@
-import Amplify from "aws-amplify";
 import React from "react";
 import Head from "next/head";
 import { AppProps } from "next/app";
 import { ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 
-import awsExports from "../aws-exports";
 import theme from "../theme";
 
 import "../../styles/global.css";
-
-Amplify.configure({
-  ...awsExports, ssr: true
-});
 
 export default function MyApp(props: AppProps) {
   const { Component, pageProps } = props;

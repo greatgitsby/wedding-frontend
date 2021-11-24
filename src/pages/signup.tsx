@@ -12,8 +12,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useForm } from 'react-hook-form';
 
 import Copyright from '../Copyright';
-import { AuthFlowImageProps, getImageProps } from '../Images';
-import Image from "next/image";
 
 interface SignUpForm {
   email: string;
@@ -47,9 +45,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignUp(props: AuthFlowImageProps) {
-  const randomImage = props.images[0];
-
+export default function SignUp() {
   const classes = useStyles();
 
   const { register, handleSubmit } = useForm();
@@ -63,7 +59,7 @@ export default function SignUp(props: AuthFlowImageProps) {
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
       <Grid item xs={false} sm={4} md={7} className={classes.imageBackground}>
-        <Image src={randomImage.relativePath} alt="" blurDataURL={randomImage.imgBase64} placeholder="blur" layout="fill" objectFit="cover" />
+        {/* <Image src="" alt="" layout="fill" objectFit="cover" /> */}
       </Grid>
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
@@ -124,5 +120,3 @@ export default function SignUp(props: AuthFlowImageProps) {
     </Grid>
   );
 }
-
-export const getStaticProps = getImageProps;
