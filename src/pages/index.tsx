@@ -36,7 +36,6 @@ export default function Index(props: any) {
             className={classes.imageList}
             gap={25}
             cols={1}
-            style={{margin: 0}}
           >
             {images.map((item: any, i: number) => {
               const width = 350;
@@ -44,7 +43,7 @@ export default function Index(props: any) {
 
               let url = "https://owen2moen.imgix.net";
               url += item.path;
-              url += `?w=${width}&h=${height}&fit=crop`;
+              url += `?w=${width*4}&h=${height*4}&fit=crop`;
 
               return (
                 <ImageListItem key={i} cols={1} rows={1}>
