@@ -1,11 +1,23 @@
+
 export async function getImageProps() {
-  const fs = await import("fs");
+  const IMGIX_API_KEY = process.env.IMGIX_API_KEY || "";
+  const IMGIX_SOURCE_ID = process.env.IMGIX_SOURCE_ID || "";
 
-  const basePath = "public/img/portraits";
+  const URL = `https://api.imgix.com/api/v1/sources/${IMGIX_SOURCE_ID}/assets`;
+  const SRC_PATH = "/gallery";
 
-  const images: string[] = fs.readdirSync(basePath).filter((f) => {
-    return !f.startsWith(".");
-  }).sort();
+  const imgixResp = await fetch(URL, { headers: { "Authorization": "Bearer " + IMGIX_API_KEY }})
+    .then((resp) => resp.json());
+
+  const images = imgixResp.data
+    .filter((image: any) => (
+      image.attributes.origin_path.startsWith(SRC_PATH)
+    ))
+    .map((image: any) => ({
+      width: image.attributes.media_width,
+      height: image.attributes.media_height,
+      path: image.attributes.origin_path
+    }));
 
   return {
     props: {

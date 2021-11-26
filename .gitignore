@@ -103,8 +103,9 @@ dist
 # TernJS port file
 .tern-port
 
-
+# Dist output
 out/
-.DS_Store
 
+# MacOS
+.DS_Store
 **/.DS_Store

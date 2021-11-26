@@ -1,4 +1,4 @@
-import { Button, ButtonGroup } from '@material-ui/core';
+import { Button, ButtonGroup } from '@mui/material';
 
 export default function HeaderButtons() {
   return (
@@ -14,9 +14,6 @@ export default function HeaderButtons() {
           Registry
         </Button>
       </ButtonGroup>
-      {/* <Button href="/#" color="secondary" variant="outlined">
-        RSVP
-      </Button> */}
     </>
   );
 }

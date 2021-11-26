@@ -1,71 +1,26 @@
 import * as React from 'react';
-import Box from '@material-ui/core/Box';
+import Box from '@mui/system/Box';
 import Copyright from '../Copyright';
 import PhotoPlug from '../PhotoPlug';
-import { Grid, ThemeProvider, Typography } from '@material-ui/core';
-import { Theme, createStyles, makeStyles, createTheme } from '@material-ui/core/styles';
+import { Grid, ThemeProvider, Typography } from '@mui/material';
+import { ImageList, ImageListItem } from '@mui/material';
 
-import { Variant } from '@material-ui/core/styles/createTypography';
+import { typography } from '../theme';
 import HeaderButtons from '../HeaderButtons';
+import { getImageProps } from '../Images';
+import { getWeddingStyles } from '../theme';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    buttons: {
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      '& > *': {
-        margin: theme.spacing(1),
-      },
-    },
-    banner: {
-      textAlign: "center",
-      justifyContent: "center"
-    },
-    root: {
-      padding: theme.spacing(3, 2),
-      height: 200,
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "center"
-    },
-    imageList: {
-      transform: 'translateZ(0)',
-      [theme.breakpoints.down('sm')]: {
-        width: 350,
-        height: 500,
-      },
-      [theme.breakpoints.up('md')]: {
-        width: 600,
-        height: 600,
-      },
-      [theme.breakpoints.up('lg')]: {
-        width: 1000,
-        height: 925,
-      }
-    },
-  }),
-);
-
-const typographyTheme = createTheme({
-  typography: {
-    fontFamily: [
-      "audhistine"
-    ].join(",")
-  }
-});
-
-export default function Index() {
-  const classes = useStyles();
-  const headerSize: Variant = "h3";
+export default function Index(props: any) {
+  const classes = getWeddingStyles();
+  const images = props.images;
 
   return (
     <Grid container justifyContent="center">
       <Grid item>
 
         <Box sx={{ my: 10 }}>
-          <ThemeProvider theme={typographyTheme}>
-            <Typography variant={headerSize} className={classes.banner}>
+          <ThemeProvider theme={typography}>
+            <Typography className={classes.banner}>
               trey + avery
             </Typography>
           </ThemeProvider>
@@ -76,9 +31,33 @@ export default function Index() {
         </Box>
 
         <Box sx={{ my: 4 }}>
-          <Typography align="center">
-            {"Coming soon."}
-          </Typography>
+          <ImageList
+            rowHeight={500}
+            className={classes.imageList}
+            gap={25}
+            cols={1}
+            style={{margin: 0}}
+          >
+            {images.map((item: any, i: number) => {
+              const width = 350;
+              const height= 500;
+
+              let url = "https://owen2moen.imgix.net";
+              url += item.path;
+              url += `?w=${width}&h=${height}&fit=crop`;
+
+              return (
+                <ImageListItem key={i} cols={1} rows={1}>
+                  <img
+                    src={url}
+                    alt="Gallery image"
+                    width={width}
+                    height={height}
+                  />
+                </ImageListItem>
+              );
+            })}
+          </ImageList>
         </Box>
 
         <Box sx={{ my: 1 }}>
@@ -93,3 +72,5 @@ export default function Index() {
     </Grid>
   );
 }
+
+export const getStaticProps = getImageProps;

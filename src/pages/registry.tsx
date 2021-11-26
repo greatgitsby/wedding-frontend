@@ -1,74 +1,32 @@
-import Box from '@material-ui/core/Box';
+import Box from '@mui/material/Box';
 import Copyright from '../Copyright';
-import { Button, Grid, Typography } from '@material-ui/core';
-import { Theme, createStyles, makeStyles, createTheme , ThemeProvider } from '@material-ui/core/styles';
-import { Variant } from '@material-ui/core/styles/createTypography';
+import { Button, Grid, Typography } from '@mui/material';
+import { Variant } from '@mui/material/styles/createTypography';
 
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
+import Card from '@mui/material/Card';
+import CardActionArea from '@mui/material/CardActionArea';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
 import HeaderButtons from '../HeaderButtons';
-
-import Cb2 from "../../public/img/cb2.png";
-import Target from "../../public/img/target.jpg";
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    buttons: {
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      '& > *': {
-        margin: theme.spacing(1),
-      },
-    },
-    headerButtons: {
-      '& > *': {
-        margin: theme.spacing(1),
-      },
-    },
-    banner: {
-      textAlign: "center",
-      justifyContent: "center"
-    },
-    root: {
-      padding: theme.spacing(3, 2),
-      height: 200,
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "center"
-    },
-    cardMedia: {
-      height: 140,
-    }
-  }),
-);
-
-const typographyTheme = createTheme({
-  typography: {
-    fontFamily: [
-      "audhistine"
-    ].join(",")
-  }
-});
+import { getWeddingStyles, typography } from '../theme';
+import { ThemeProvider } from '@mui/material';
 
 export default function Details() {
-  const classes = useStyles();
+  const classes = getWeddingStyles();
   const registryItems = [
     {
       title: "CB2",
       description: "View our CB2 home registry by clicking the button below!",
       href: "#",
-      image: Cb2.src,
+      image: "https://owen2moen.imgix.net/assets/cb2.png",
       imageAlt: "CB2 logo"
     },
     {
       title: "Target",
       description: "View our Target registry by clicking the button below!",
       href: "#",
-      image: Target.src,
+      image: "https://owen2moen.imgix.net/assets/target.jpg",
       imageAlt: "Target logo"
     }
   ]
@@ -79,7 +37,7 @@ export default function Details() {
     <Grid container justifyContent="center">
       <Grid item>
         <Box sx={{ my: 10 }}>
-          <ThemeProvider theme={typographyTheme}>
+          <ThemeProvider theme={typography}>
             <Typography variant={headerSize} className={classes.banner}>
               trey + avery
             </Typography>
