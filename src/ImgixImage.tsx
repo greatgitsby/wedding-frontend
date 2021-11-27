@@ -1,5 +1,13 @@
 import Image from "next/image";
 
+interface ImgixImageProps {
+  src: string;
+  width: number;
+  height: number;
+  quality: number;
+  fit: string;
+}
+
 function CreateNewImgixLoader(
   imageHeight: number,
   imageWidth: number,
@@ -8,7 +16,6 @@ function CreateNewImgixLoader(
 
   return ({
     src,
-    width,
     quality
   }: any): string => {
     const url = new URL(src);
@@ -29,7 +36,7 @@ export default function ImgixImage({
   height,
   quality,
   fit
-}) {
+}: ImgixImageProps) {
 
   const loader = CreateNewImgixLoader(height, width, fit);
 

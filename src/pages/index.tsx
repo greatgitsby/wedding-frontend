@@ -15,7 +15,7 @@ export default function Index(props: any) {
   const classes = getWeddingStyles();
   const images = props.images;
 
-  function getGalleryDims(image) {
+  function getGalleryDims(image: any) {
     let rows = 1;
     let cols = 1;
 
@@ -66,7 +66,7 @@ export default function Index(props: any) {
             variant="quilted"
             cols={4}
           >
-            {images.map(getGalleryDims).map((image) => (
+            {images.map(getGalleryDims).map((image: any) => (
               <ImageListItem key={image.src} cols={image.cols} rows={image.rows}>
                 <ImgixImage
                   src={image.src}
