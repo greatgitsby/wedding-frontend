@@ -53,7 +53,6 @@ const getWeddingStyles = makeStyles((theme: Theme) => ({
   banner: {
     textAlign: "center",
     justifyContent: "center",
-    fontSize: "2.5em",
   },
   root: {
     padding: theme.spacing(3, 2),

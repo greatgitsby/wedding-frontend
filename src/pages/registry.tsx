@@ -1,16 +1,14 @@
 import Box from '@mui/material/Box';
-import Copyright from '../Copyright';
+import Copyright from '../Footer';
 import { Button, Grid, Typography } from '@mui/material';
-import { Variant } from '@mui/material/styles/createTypography';
 
 import Card from '@mui/material/Card';
 import CardActionArea from '@mui/material/CardActionArea';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import HeaderButtons from '../HeaderButtons';
-import { getWeddingStyles, typography } from '../theme';
-import { ThemeProvider } from '@mui/material';
+import Top from '../Top';
+import { getWeddingStyles } from '../theme';
 
 export default function Details() {
   const classes = getWeddingStyles();
@@ -31,21 +29,11 @@ export default function Details() {
     }
   ]
 
-  let headerSize: Variant = "h3";
-
   return (
     <Grid container justifyContent="center">
       <Grid item>
-        <Box sx={{ my: 10 }}>
-          <ThemeProvider theme={typography}>
-            <Typography variant={headerSize} className={classes.banner}>
-              trey + avery
-            </Typography>
-          </ThemeProvider>
-        </Box>
-        <Box sx={{ my: 5 }} className={classes.buttons}>
-          <HeaderButtons />
-        </Box>
+
+        <Top classes={classes} />
 
         <Grid container spacing={2}>
           {registryItems.map((item, i) => (

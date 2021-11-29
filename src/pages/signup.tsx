@@ -10,7 +10,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import Typography from '@mui/material/Typography';
 import { useForm } from 'react-hook-form';
 
-import Copyright from '../Copyright';
+import Copyright from '../Footer';
 import { getAuthStyles } from '../theme';
 
 interface SignUpForm {

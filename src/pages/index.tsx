@@ -1,15 +1,14 @@
 import * as React from 'react';
 import Box from '@mui/system/Box';
-import Copyright from '../Copyright';
+import Copyright from '../Footer';
 import PhotoPlug from '../PhotoPlug';
-import { Grid, ThemeProvider, Typography } from '@mui/material';
+import { Grid } from '@mui/material';
 import { ImageList, ImageListItem } from '@mui/material';
 
-import { typography } from '../theme';
-import HeaderButtons from '../HeaderButtons';
 import { getImageProps } from '../Images';
 import { getWeddingStyles } from '../theme';
 import ImgixImage from '../ImgixImage';
+import Top from '../Top';
 
 export default function Index(props: any) {
   const classes = getWeddingStyles();
@@ -32,35 +31,25 @@ export default function Index(props: any) {
     <Grid container justifyContent="center">
       <Grid item>
 
-        <Box sx={{ my: 10 }}>
-          <ThemeProvider theme={typography}>
-            <Typography className={classes.banner}>
-              trey + avery
-            </Typography>
-          </ThemeProvider>
-        </Box>
-
-        <Box sx={{ my: 4 }} className={classes.buttons}>
-          <HeaderButtons />
-        </Box>
-
+        <Top classes={classes} />
+        
         <Box sx={{ my: 4 }}>
           <ImageList
             rowHeight={"auto"}
             sx={{
               width: {
-                xs: 400,
+                xs: 350,
                 sm: 550,
-                md: 700,
-                lg: 800,
-                xl: 900 
+                md: 800,
+                lg: 900,
+                xl: 1100 
               },
               height: {
-                xs: 400,
+                xs: 350,
                 sm: 550,
                 md: 700,
-                lg: 800,
-                xl: 900 
+                lg: 700,
+                xl: 800 
               }
             }}
             variant="quilted"

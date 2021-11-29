@@ -11,7 +11,7 @@ import Typography from '@mui/material/Typography';
 import Link from "@mui/material/Link"
 import { useForm } from 'react-hook-form';
 
-import Copyright from '../Copyright';
+import Copyright from '../Footer';
 import { getAuthStyles } from '../theme';
 
 interface LoginForm {
