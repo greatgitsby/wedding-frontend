@@ -30,12 +30,12 @@ export default function Details() {
   ]
 
   return (
-    <Grid container justifyContent="center">
+    <Grid container alignItems="center" justifyContent="center">
       <Grid item>
 
         <Top classes={classes} />
 
-        <Grid container spacing={2}>
+        <Grid container alignItems="center" justifyContent="center" spacing={2}>
           {registryItems.map((item, i) => (
             <Grid item key={i}>
               <Card>

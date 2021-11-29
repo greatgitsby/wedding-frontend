@@ -63,25 +63,7 @@ const getWeddingStyles = makeStyles((theme: Theme) => ({
   },
   cardMedia: {
     height: 140
-  },
-  imageList: {
-    width: 350,
-    height: 500
-    /*
-    [theme.breakpoints.down('sm')]: {
-      width: 350,
-      height: 500,
-    },
-    [theme.breakpoints.up('md')]: {
-      width: 600,
-      height: 600,
-    },
-    [theme.breakpoints.up('lg')]: {
-      width: 1000,
-      height: 925,
-    }
-    */
-  },
+  }
 }));
 
 const getAuthStyles = makeStyles((theme: Theme) => ({
