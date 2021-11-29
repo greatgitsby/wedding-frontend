@@ -4,7 +4,7 @@ import MuiLink from '@mui/material/Link';
 
 export default function Footer() {
   return (
-    <Typography variant="body2" align="center">
+    <Typography variant="subtitle1" align="center" fontFamily="Roboto">
       {'Made with 💛 by '}
       <MuiLink color="inherit" href="https://treymoen.com" target="_blank">
         Trey Moen

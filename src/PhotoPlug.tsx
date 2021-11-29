@@ -4,7 +4,7 @@ import MuiLink from '@mui/material/Link';
 
 export default function PhotoPlug() {
   return (
-    <Typography variant="body2" align="center">
+    <Typography variant="subtitle1" align="center" fontFamily="Roboto">
       {'📷 by '}
       <MuiLink color="inherit" href="https://www.instagram.com/a.roley/" target="_blank">
         Alex Roley

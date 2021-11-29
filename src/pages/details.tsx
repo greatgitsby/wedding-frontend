@@ -15,8 +15,8 @@ export default function Details() {
         <Top classes={classes} />
 
         <Box sx={{ my: 4 }}>
-          <Typography align="center">
-            {"Coming soon."}
+          <Typography align="center" fontFamily="Roboto">
+            {"6-11-2022"}
           </Typography>
         </Box>
 
