@@ -7,6 +7,10 @@ import Top from '../Top';
 
 export default function Details() {
   const classes = getWeddingStyles();
+  const lines = [
+    "6-11-2022",
+    "Contact us at hello <at> owen2moen <dot> com"
+  ];
 
   return (
     <Grid container justifyContent="center">
@@ -15,9 +19,11 @@ export default function Details() {
         <Top classes={classes} />
 
         <Box sx={{ my: 4 }}>
-          <Typography align="center" fontFamily="Roboto">
-            {"6-11-2022"}
-          </Typography>
+          {lines.map((line) => (
+            <Typography key={line} align="center" fontFamily="Roboto">
+              {line}
+            </Typography>
+          ))}
         </Box>
 
         <Box sx={{ my: 4 }}>
