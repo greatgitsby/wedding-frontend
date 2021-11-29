@@ -21,8 +21,8 @@ function CreateNewImgixLoader(
     const url = new URL(src);
 
     url.searchParams.set("auto", "format");
-    url.searchParams.set("w", (imageWidth*2).toString());
-    url.searchParams.set("h", (imageHeight*2).toString());
+    url.searchParams.set("w", (imageWidth).toString());
+    url.searchParams.set("h", (imageHeight).toString());
     url.searchParams.set("fit", fit);
     url.searchParams.set("quality", quality || 75);
 

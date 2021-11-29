@@ -14,19 +14,6 @@ export default function Index(props: any) {
   const classes = getWeddingStyles();
   const images = props.images;
 
-  function getGalleryDims(image: any) {
-    let rows = 1;
-    let cols = 1;
-
-    if (image.width > image.height) {
-      cols++;
-    } else {
-      rows++;
-    }
-
-    return { rows, cols, ...image };
-  }
-
   return (
     <Grid container justifyContent="center">
       <Grid item>
@@ -35,33 +22,29 @@ export default function Index(props: any) {
         
         <Box sx={{ my: 4 }}>
           <ImageList
-            rowHeight={"auto"}
             sx={{
               width: {
                 xs: 350,
                 sm: 550,
-                md: 800,
-                lg: 900,
-                xl: 1100 
+                md: 750,
+                lg: 1000,
+                xl: 1200
               },
-              height: {
-                xs: 350,
-                sm: 550,
-                md: 700,
-                lg: 700,
-                xl: 800 
-              }
+              height: "100%"
             }}
-            variant="quilted"
-            cols={4}
+            variant="woven"
+            cols={2}
           >
-            {images.map(getGalleryDims).map((image: any) => (
-              <ImageListItem key={image.src} cols={image.cols} rows={image.rows}>
+            {images.map((image: any) => (
+              <ImageListItem
+                key={image.src}
+                cols={1}
+              >
                 <ImgixImage
                   src={image.src}
-                  width={220*image.cols}
-                  height={250*image.rows}
-                  quality={75}
+                  width={600}
+                  height={900}
+                  quality={50}
                   fit={"crop"}
                 />
               </ImageListItem>

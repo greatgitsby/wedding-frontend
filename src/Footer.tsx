@@ -6,7 +6,7 @@ export default function Footer() {
   return (
     <Typography variant="body2" align="center">
       {'Made with 💛 by '}
-      <MuiLink color="inherit" href="https://treymoen.dev/" target="_blank">
+      <MuiLink color="inherit" href="https://treymoen.com" target="_blank">
         Trey Moen
       </MuiLink>
     </Typography>

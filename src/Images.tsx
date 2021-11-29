@@ -1,4 +1,3 @@
-
 export async function getImageProps() {
   const IMGIX_API_KEY = process.env.IMGIX_API_KEY || "";
   const IMGIX_SOURCE_ID = process.env.IMGIX_SOURCE_ID || "";
