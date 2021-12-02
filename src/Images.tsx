@@ -1,79 +1,27 @@
-interface ImageWithBlurEncoding {
-  fileName: string;
-  relativePath: string;
-  width: number;
-  height: number;
-  imgBase64: string;
-}
-
-export interface AuthFlowImageProps {
-  images: ImageWithBlurEncoding[];
-}
-
-async function generateImageMetadata(
-  basePath: string,
-  placeholderWidth: number,
-  images: string[]
-): Promise<ImageWithBlurEncoding[]> {
-
-  const sharp = (await import("sharp")).default;
-  const path = await import("path");
-
-  const theImages: ImageWithBlurEncoding[] = [];
-
-  for (const filename of images) {
-    const fullPath = basePath + "/" + filename;
-    const sharpImg = sharp(fullPath);
-    const meta = await sharpImg.metadata();
-    const imgAspectRatio = (meta.width || 1) / (meta.height || 1);
-    const placeholderImgHeight = Math.round(placeholderWidth / imgAspectRatio);
-    const imgBase64 = await sharpImg
-      .resize(placeholderWidth, placeholderImgHeight)
-      .toBuffer()
-      .then(
-        buffer => `data:image/${meta.format};base64,${buffer.toString('base64')}`
-      );
- 
-    theImages.push({
-      fileName: path.basename(fullPath),
-      // Strip public prefix, /public is / in Nextjs runtime environment
-      relativePath: path
-        .relative(process.cwd(), fullPath)
-        .substring('public'.length),
-      width: meta.width || 1,
-      height: meta.height || 1,
-      imgBase64
-    });
-  }
-
-  return theImages;
-}
-
 export async function getImageProps() {
-  const fs = await import("fs");
-  const md5 = (await import("md5")).default;
+  const IMGIX_API_KEY = process.env.IMGIX_API_KEY || "";
+  const IMGIX_SOURCE_ID = process.env.IMGIX_SOURCE_ID || "";
 
-  const basePath = "public/img/portraits";
-  const placeholderWidth = 20;
-  let theImages: ImageWithBlurEncoding[] = [];
+  const DOMAIN = "https://owen2moen.imgix.net";
+  const URL = `https://api.imgix.com/api/v1/sources/${IMGIX_SOURCE_ID}/assets`;
+  const SRC_PATH = "/gallery";
 
-  const images: string[] = fs.readdirSync(basePath).filter((f) => {
-    return !f.startsWith(".");
-  }).sort();
+  const imgixResp = await fetch(URL, { headers: { "Authorization": "Bearer " + IMGIX_API_KEY }})
+    .then((resp) => resp.json());
 
-  const hash = md5(images.join());
-  const hashFile = "public/"+hash+".json";
-
-  if (!fs.existsSync(hashFile)) {
-    theImages = await generateImageMetadata(basePath, placeholderWidth, images);
-    fs.writeFileSync(hashFile, JSON.stringify(theImages, null, 2));
-  } else {
-    theImages = JSON.parse(fs.readFileSync(hashFile).toString());
-  }
+  const images = imgixResp.data
+    .filter((image: any) => (
+      image.attributes.origin_path.startsWith(SRC_PATH)
+    ))
+    .map((image: any) => ({
+      width: image.attributes.media_width,
+      height: image.attributes.media_height,
+      src: DOMAIN + image.attributes.origin_path
+    }));
 
   return {
     props: {
-      images: theImages,
+      images,
     },
   };
 }

@@ -1,55 +1,26 @@
 import React from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import Paper from '@material-ui/core/Paper';
-import Box from '@material-ui/core/Box';
-import Grid from '@material-ui/core/Grid';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import Typography from '@material-ui/core/Typography';
-import Link from "@material-ui/core/Link"
-import { makeStyles } from '@material-ui/core/styles';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import CssBaseline from '@mui/material/CssBaseline';
+import TextField from '@mui/material/TextField';
+import Paper from '@mui/material/Paper';
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import Typography from '@mui/material/Typography';
+import Link from "@mui/material/Link"
 import { useForm } from 'react-hook-form';
-import Image from "next/image";
 
-import Copyright from '../Copyright';
-import { AuthFlowImageProps, getImageProps } from '../Images';
+import Copyright from '../Footer';
+import { getAuthStyles } from '../theme';
 
 interface LoginForm {
   email: string;
   password: string;
 }
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    height: '100vh',
-  },
-  imageBackground: {
-    position: "relative",
-  },
-  paper: {
-    margin: theme.spacing(8, 4),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-}));
-
-export default function LogIn(props: AuthFlowImageProps) {
-  const randomImage = props.images[0];
-  const classes = useStyles();
+export default function LogIn() {
+  const classes = getAuthStyles();
   const { register, handleSubmit } = useForm();
 
   const onSubmit = (form: LoginForm) => {
@@ -61,7 +32,7 @@ export default function LogIn(props: AuthFlowImageProps) {
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
       <Grid item xs={false} sm={4} md={7} className={classes.imageBackground}>
-        <Image src={randomImage.relativePath} alt="" blurDataURL={randomImage.imgBase64} placeholder="blur" layout="fill" objectFit="cover" />
+        {/* <Image src="" alt="" layout="fill" objectFit="cover" /> */}
       </Grid>
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
@@ -124,5 +95,3 @@ export default function LogIn(props: AuthFlowImageProps) {
     </Grid>
   );
 }
-
-export const getStaticProps = getImageProps;

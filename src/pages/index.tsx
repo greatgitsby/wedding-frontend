@@ -1,129 +1,55 @@
 import * as React from 'react';
-import Box from '@material-ui/core/Box';
-import Copyright from '../Copyright';
+import Box from '@mui/system/Box';
+import Copyright from '../Footer';
 import PhotoPlug from '../PhotoPlug';
-import ImageList from '@material-ui/core/ImageList';
-import ImageListItem from '@material-ui/core/ImageListItem';
-import { Grid, ThemeProvider, Typography } from '@material-ui/core';
-import { Theme, createStyles, makeStyles, createTheme } from '@material-ui/core/styles';
-import { AuthFlowImageProps, getImageProps } from '../Images';
+import { Grid } from '@mui/material';
+import { ImageList, ImageListItem } from '@mui/material';
 
-import Image from "next/image";
-import useMeasure from 'react-use-measure';
-import { Variant } from '@material-ui/core/styles/createTypography';
-import HeaderButtons from '../HeaderButtons';
+import { getImageProps } from '../Images';
+import { getWeddingStyles } from '../theme';
+import ImgixImage from '../ImgixImage';
+import Top from '../Top';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    buttons: {
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      '& > *': {
-        margin: theme.spacing(1),
-      },
-    },
-    banner: {
-      textAlign: "center",
-      justifyContent: "center"
-    },
-    root: {
-      padding: theme.spacing(3, 2),
-      height: 200,
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "center"
-    },
-    imageList: {
-      transform: 'translateZ(0)',
-      [theme.breakpoints.down('sm')]: {
-        width: 350,
-        height: 500,
-      },
-      [theme.breakpoints.up('md')]: {
-        width: 600,
-        height: 600,
-      },
-      [theme.breakpoints.up('lg')]: {
-        width: 1000,
-        height: 925,
-      }
-    },
-  }),
-);
-
-const typographyTheme = createTheme({
-  typography: {
-    fontFamily: [
-      "audhistine"
-    ].join(",")
-  }
-});
-
-export default function Index(props: AuthFlowImageProps) {
-  const classes = useStyles();
+export default function Index(props: any) {
+  const classes = getWeddingStyles();
   const images = props.images;
-  const [ref, bounds] = useMeasure();
-
-  const pixelGap = 6;
-
-  let headerSize: Variant = "h3";
-  let numImageColumns = 5;
-  let rowsPerImage = 2;
-
-  let imageHeight = 300;
-
-  if (bounds.width == 600) {
-    numImageColumns = 2;
-    imageHeight = 500;
-  } else if (bounds.width == 350) {
-    numImageColumns = 1;
-    imageHeight = 500;
-  }
-
-  let imageWidth = ((bounds.width - (pixelGap * numImageColumns)) / (numImageColumns));
 
   return (
     <Grid container justifyContent="center">
       <Grid item>
 
-        <Box sx={{ my: 10 }}>
-          <ThemeProvider theme={typographyTheme}>
-            <Typography variant={headerSize} className={classes.banner}>
-              trey + avery
-            </Typography>
-          </ThemeProvider>
-        </Box>
-
-        <Box sx={{ my: 4 }} className={classes.buttons}>
-          <HeaderButtons />
-        </Box>
-
+        <Top classes={classes} />
+        
         <Box sx={{ my: 4 }}>
           <ImageList
-            innerRef={ref}
-            rowHeight={imageHeight/rowsPerImage}
-            className={classes.imageList}
-            gap={pixelGap}
-            cols={numImageColumns}
+            sx={{
+              width: {
+                xs: 350,
+                sm: 550,
+                md: 750,
+                lg: 1000,
+                xl: 1200
+              },
+              height: "100%",
+              pointerEvents: "none"
+            }}
+            variant="woven"
+            cols={2}
           >
-            {images.map((item, i) => {
-              return (
-                <ImageListItem key={i} cols={1} rows={rowsPerImage}>
-                  <Image
-                    src={item.relativePath}
-                    alt=""
-                    placeholder="blur"
-                    blurDataURL={item.imgBase64}
-                    layout="fixed"
-                    width={imageWidth}
-                    height={imageHeight}
-                    objectFit="cover"
-                    objectPosition="50% 0%"
-                  />
-                </ImageListItem>
-              );
-            })}
+            {images.map((image: any) => (
+              <ImageListItem
+                key={image.src}
+                cols={1}
+              >
+                <ImgixImage
+                  src={image.src}
+                  width={300}
+                  height={450}
+                  quality={25}
+                  fit={"crop"}
+                />
+              </ImageListItem>
+            ))}
           </ImageList>
         </Box>
 

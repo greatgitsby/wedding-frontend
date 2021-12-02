@@ -1,15 +1,23 @@
 import React from "react";
 import Head from "next/head";
 import { AppProps } from "next/app";
-import { ThemeProvider } from "@material-ui/core/styles";
-import CssBaseline from "@material-ui/core/CssBaseline";
+import { ThemeProvider } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
 
 import theme from "../theme";
 
 import "../../styles/global.css";
+import { getImageProps } from "../Images";
 
 export default function MyApp(props: AppProps) {
   const { Component, pageProps } = props;
+  const images = pageProps.images;
+  let ogImage = "";
+
+  if (images) {
+    const randomImage = images[Math.floor(Math.random() * images.length)];
+    ogImage = randomImage.src;
+  }
 
   React.useEffect(() => {
     // Remove the server-side injected CSS.
@@ -35,7 +43,7 @@ export default function MyApp(props: AppProps) {
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://owen2moen.com/" />
         <meta property="og:description" content="We're getting married!" />
-        <meta property="og:image" content="/img/portraits/DSC_0708.jpg" />
+        <meta property="og:image" content={ogImage} />
       </Head>
       <ThemeProvider theme={theme}>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
@@ -45,3 +53,5 @@ export default function MyApp(props: AppProps) {
     </React.Fragment>
   );
 }
+
+export const getInitialProps = getImageProps;
