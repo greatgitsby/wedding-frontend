@@ -1,12 +1,17 @@
-# Moen Wedding Site
+# 💍 Moen Wedding Site 💍
 
-## Landing Page
-![Image](docs/landing.jpg)
+## Look at those cuties 😻
+![Landing page](docs/landing.jpg)
 
 ## Information
 This is the site for the wedding of myself and Avery (lady friend extraordinaire).
-I'm utilizing a combination of TypeScript, Next.js, React, and Material UI. The
-application itself is hosted locally using my custom Nginx Docker-compose
+I'm utilizing a combination of:
+- TypeScript
+- Next.js
+- React
+- Material UI
+
+The application itself is hosted locally using my custom Nginx Docker-compose
 setup (coming soon to GitHub).
 
 View it [here](https://staging.owen2moen.com)!
