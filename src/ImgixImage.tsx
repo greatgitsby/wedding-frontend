@@ -6,7 +6,7 @@ interface ImgixImageProps {
   height: number;
   quality: number;
   fit: string;
-}
+};
 
 function CreateNewImgixLoader(
   imageHeight: number,
