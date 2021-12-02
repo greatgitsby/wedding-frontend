@@ -30,7 +30,8 @@ export default function Index(props: any) {
                 lg: 1000,
                 xl: 1200
               },
-              height: "100%"
+              height: "100%",
+              pointerEvents: "none"
             }}
             variant="woven"
             cols={2}
