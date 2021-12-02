@@ -43,8 +43,8 @@ export default function Index(props: any) {
               >
                 <ImgixImage
                   src={image.src}
-                  width={300}
-                  height={450}
+                  width={600}
+                  height={900}
                   quality={25}
                   fit={"crop"}
                 />
