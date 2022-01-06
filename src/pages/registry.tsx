@@ -1,10 +1,9 @@
 import Box from '@mui/material/Box';
 import Copyright from '../Footer';
-import { Grid, Typography } from '@mui/material';
+import { Grid } from '@mui/material';
 
 import Card from '@mui/material/Card';
 import CardActionArea from '@mui/material/CardActionArea';
-import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Header from '../Header';
 import { getWeddingStyles } from '../theme';
