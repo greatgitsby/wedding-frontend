@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Copyright from '../Footer';
 import { Grid, Typography } from '@mui/material';
 import { getWeddingStyles } from '../theme';
-import Top from '../Top';
+import Header from '../Header';
 
 export default function Details() {
   const classes = getWeddingStyles();
@@ -14,7 +14,7 @@ export default function Details() {
   const weddingDate = new Date(weddingDateStr);
   const todaysDate = new Date();
   const timeDiff = weddingDate.getTime() - todaysDate.getTime();
-  const numDaysTillWedding = Math.floor(timeDiff / (1000*60*60*24));
+  const numDaysTillWedding = Math.floor(timeDiff / (1000*60*60*24)) + 1;
 
   const lines = [
     weddingDateStr,
@@ -26,7 +26,7 @@ export default function Details() {
     <Grid container justifyContent="center">
       <Grid item>
 
-        <Top classes={classes} />
+        <Header classes={classes} />
 
         <Box sx={{ my: 4 }}>
           {lines.map((line) => (

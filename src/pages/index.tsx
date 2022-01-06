@@ -8,7 +8,7 @@ import { ImageList, ImageListItem } from '@mui/material';
 import { getImageProps } from '../Images';
 import { getWeddingStyles } from '../theme';
 import ImgixImage from '../ImgixImage';
-import Top from '../Top';
+import Header from '../Header';
 
 export default function Index(props: any) {
   const classes = getWeddingStyles();
@@ -18,7 +18,7 @@ export default function Index(props: any) {
     <Grid container justifyContent="center">
       <Grid item>
 
-        <Top classes={classes} />
+        <Header classes={classes} />
         
         <Box sx={{ my: 4 }}>
           <ImageList
@@ -33,7 +33,7 @@ export default function Index(props: any) {
               height: "100%",
               pointerEvents: "none"
             }}
-            variant="woven"
+            variant="quilted"
             cols={2}
           >
             {images.map((image: any) => (

@@ -1,8 +1,8 @@
-import { createTheme } from '@mui/material/styles';
-import { red } from '@mui/material/colors';
+import { createTheme } from "@mui/material/styles";
+import { red } from "@mui/material/colors";
 
-import { Theme } from '@mui/material';
-import { makeStyles } from '@mui/styles';
+import { Theme } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 
 const typography = createTheme({
   typography: {
@@ -19,12 +19,12 @@ const theme = createTheme({
       default: "#ffffff"
     },
     primary: {
-      light: '#a6d4fa',
-      main: '#90caf9',
-      dark: '#648dae'
+      light: "#a6d4fa",
+      main: "#90caf9",
+      dark: "#648dae"
     },
     secondary: {
-      main: '#cf7694',
+      main: "#cf7694",
     },
     error: {
       main: red.A400,
@@ -43,10 +43,10 @@ const theme = createTheme({
 
 const getWeddingStyles = makeStyles((theme: Theme) => ({
   buttons: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    '& > *': {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    "& > *": {
       margin: theme.spacing(1),
     },
   },
@@ -63,28 +63,33 @@ const getWeddingStyles = makeStyles((theme: Theme) => ({
   },
   cardMedia: {
     height: 140
+  },
+  animation: {
+    display: "flex",
+    alignContent: "center",
+    justifyContent: "center"
   }
 }));
 
 const getAuthStyles = makeStyles((theme: Theme) => ({
   root: {
-    height: '100vh',
+    height: "100vh",
   },
   imageBackground: {
     position: "relative",
   },
   paper: {
     margin: theme.spacing(8, 4),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   },
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(1),
   },
   submit: {

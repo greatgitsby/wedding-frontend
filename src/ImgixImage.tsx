@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image, { ImageLoader } from "next/image";
 
 interface ImgixImageProps {
   src: string;
@@ -9,22 +9,22 @@ interface ImgixImageProps {
 };
 
 function CreateNewImgixLoader(
-  imageHeight: number,
   imageWidth: number,
+  imageHeight: number,
   fit: string
-): any {
+): ({ src, quality }: ImgixImageProps) => string {
 
   return ({
     src,
     quality
-  }: any): string => {
+  }: ImgixImageProps): string => {
     const url = new URL(src);
 
     url.searchParams.set("auto", "format");
-    url.searchParams.set("w", (imageWidth).toString());
-    url.searchParams.set("h", (imageHeight).toString());
+    url.searchParams.set("w", (imageWidth*0.95).toString());
+    url.searchParams.set("h", (imageHeight*2.25).toString());
     url.searchParams.set("fit", fit);
-    url.searchParams.set("quality", quality || 75);
+    url.searchParams.set("quality", quality.toString() || (75).toString());
 
     return url.href;
   }
@@ -38,11 +38,12 @@ export default function ImgixImage({
   fit
 }: ImgixImageProps) {
 
+  // Return closure of new image loader
   const loader = CreateNewImgixLoader(height, width, fit);
 
   return (
     <Image
-      loader={loader}
+      loader={loader as ImageLoader}
       src={src}
       width={width}
       height={height}

@@ -6,12 +6,12 @@ import Card from '@mui/material/Card';
 import CardActionArea from '@mui/material/CardActionArea';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import Top from '../Top';
+import Header from '../Header';
 import { getWeddingStyles } from '../theme';
 
 export default function Details() {
   const classes = getWeddingStyles();
-  const registryItems = [
+  let registryItems = [
     {
       title: "Amazon",
       href: "https://www.amazon.com/wedding/share/owen2moen",
@@ -25,43 +25,49 @@ export default function Details() {
       alt: "CB2 logo"
     },
     {
+      title: "Crate and Barrel",
+      href: "https://www.crateandbarrel.com/gift-registry/avery-owen-and-trey-moen/r6423626",
+      image: "https://owen2moen.imgix.net/assets/crateandbarrel.png",
+      alt: "CB2 logo"
+    },
+    {
       title: "Target",
       href: "https://www.target.com/gift-registry/gift/owen2moen",
-      image: "https://owen2moen.imgix.net/assets/target.jpeg",
+      image: "https://owen2moen.imgix.net/assets/target.png",
       alt: "Target logo"
+    },
+    {
+      title: "HoneyFund",
+      href: "https://www.honeyfund.com/wedding/owen2moen",
+      image: "https://owen2moen.imgix.net/assets/honeyfund.png",
+      alt: "HoneyFund logo"
     }
-  ]
+  ].sort((a, b) => a.title.toUpperCase() > b.title.toUpperCase() ? 1 : -1);
 
   return (
     <Grid container alignItems="center" justifyContent="center">
       <Grid item>
-
-        <Top classes={classes} />
-
-        <Grid container alignItems="center" justifyContent="center" spacing={2}>
+        <Header classes={classes} />
+        <Grid
+          container
+          alignItems="center"
+          justifyContent="center"
+          spacing={2}
+          maxWidth={1000}
+        >
           {registryItems.map((item, i) => (
             <Grid item key={i}>
-              <Card sx={{
-                width: {
-                  xs: 325,
-                  sm: 350,
-                  ":default": 400
-                }
-              }}>
+              <Card
+                sx={{
+                  width: 350
+                }}
+              >
                 <CardActionArea href={item.href} target="_blank">
                   <CardMedia
                     className={classes.cardMedia}
                     image={item.image}
                     title={item.alt}
                   />
-                  <CardContent>
-                    <Typography gutterBottom variant="h5" component="h2">
-                      {item.title}
-                    </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                      {`Tap to view our ${item.title} registry!`}
-                    </Typography>
-                  </CardContent>
                 </CardActionArea>
               </Card>
             </Grid>
