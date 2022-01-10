@@ -26,8 +26,7 @@ export function UploadPictureButton() {
         mode: "no-cors",
         body: form
       })
-        .then(body => {
-          console.log(body);
+        .then(_ => {
           setOpen(true);
         })
         .catch((err) => console.error(err))
