@@ -1,46 +1,60 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
 import Copyright from '../Footer';
-import { Grid, Typography } from '@mui/material';
-import { getWeddingStyles } from '../theme';
+import { Box, Card, Grid, Stack, Theme, Typography } from '@mui/material';
 import Header from '../Header';
 
 export default function Details() {
-  const classes = getWeddingStyles();
-
   const weddingDateStr = "06/11/2022";
 
   // Get number of days till wedding!
   const weddingDate = new Date(weddingDateStr);
   const todaysDate = new Date();
   const timeDiff = weddingDate.getTime() - todaysDate.getTime();
-  const numDaysTillWedding = Math.floor(timeDiff / (1000*60*60*24)) + 1;
+  const numDaysTillWedding = Math.floor(timeDiff / (1000 * 60 * 60 * 24)) + 1;
 
   const lines = [
     weddingDateStr,
     `${numDaysTillWedding} days until the wedding!`,
-    "Contact us at hello <at> owen2moen <dot> com"
+    "Contact us at hello@owen2moen.com"
   ];
 
   return (
     <Grid container justifyContent="center">
-      <Grid item>
+      <Stack
+        spacing={4}
+        justifyContent={"center"}
+        sx={{
+          maxWidth: {
+            xs: "80vw",
+            sm: "90vw"
+          }
+        }}
+      >
 
-        <Header classes={classes} />
+        <Header />
 
-        <Box sx={{ my: 4 }}>
-          {lines.map((line) => (
-            <Typography key={line} align="center">
-              {line}
-            </Typography>
-          ))}
+        <Box alignSelf={"center"}>
+          <Card
+            raised
+            sx={{
+              padding: "50px", backgroundColor: (theme: Theme) => theme.palette.secondary.main
+            }}
+          >
+            {lines.map((line, i) => (
+              <Typography
+                key={i}
+                align={"center"}
+                sx={{
+                }}
+                color={"#fff"}
+              >
+                {line}
+              </Typography>
+            ))}
+          </Card>
         </Box>
 
-        <Box sx={{ my: 4 }}>
-          <Copyright />
-        </Box>
-
-      </Grid>
+        <Copyright />
+      </Stack>
     </Grid>
   );
 }

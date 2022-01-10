@@ -42,14 +42,6 @@ const theme = createTheme({
 });
 
 const getWeddingStyles = makeStyles((theme: Theme) => ({
-  buttons: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    "& > *": {
-      margin: theme.spacing(1),
-    },
-  },
   banner: {
     textAlign: "center",
     justifyContent: "center",
@@ -63,11 +55,6 @@ const getWeddingStyles = makeStyles((theme: Theme) => ({
   },
   cardMedia: {
     height: 140
-  },
-  animation: {
-    display: "flex",
-    alignContent: "center",
-    justifyContent: "center"
   }
 }));
 

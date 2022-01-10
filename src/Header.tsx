@@ -1,19 +1,27 @@
 import HeaderButtons from './HeaderButtons';
-import Box from '@mui/system/Box';
+import { Stack } from '@mui/material';
+import { Box } from '@mui/system';
 
-export default function Header(props: any) {
-  const classes = props.classes;
-
+export default function Header() {
   return (
-    <>
-      <Box sx={{ my: 8 }} className={classes.animation}>
+    <Stack
+      spacing={8}
+      sx={{
+        width: {
+          xs: "80vw",
+          sm: "90vw",
+          md: "90vw",
+          lg: "90vw",
+          xl: "90vw",
+        }
+      }}
+
+    >
+      <Box alignSelf={"center"}>
         <img src={'./assets/owen2moen.gif'} width={350} height={200} />
       </Box>
 
-      <Box sx={{ my: 4 }} className={classes.buttons}>
-        <HeaderButtons />
-      </Box>
-    </>
+      <HeaderButtons />
+    </Stack>
   );
-
 }

@@ -1,6 +1,5 @@
-import Box from '@mui/material/Box';
 import Copyright from '../Footer';
-import { Grid } from '@mui/material';
+import { Grid, Stack } from '@mui/material';
 
 import Card from '@mui/material/Card';
 import CardActionArea from '@mui/material/CardActionArea';
@@ -10,6 +9,7 @@ import { getWeddingStyles } from '../theme';
 
 export default function Details() {
   const classes = getWeddingStyles();
+
   let registryItems = [
     {
       title: "Amazon",
@@ -44,28 +44,43 @@ export default function Details() {
   ].sort((a, b) => a.title.toUpperCase() > b.title.toUpperCase() ? 1 : -1);
 
   return (
-    <Grid container alignItems="center" justifyContent="center">
-      <Grid item>
-        <Header classes={classes} />
+    <Grid container justifyContent="center">
+      <Stack spacing={4}>
+        <Header />
+
         <Grid
           container
-          alignItems="center"
-          justifyContent="center"
-          spacing={2}
-          maxWidth={1000}
+          rowSpacing={2}
+          justifyContent={"center"}
+          justifyItems={"center"}
+          justifySelf={"center"}
+          sx={{
+            maxWidth: {
+              xs: "80vw",
+              sm: "90vw"
+            }
+          }}
         >
           {registryItems.map((item, i) => (
-            <Grid item key={i}>
-              <Card
-                sx={{
-                  width: 350
-                }}
-              >
+            <Grid
+              item
+              key={i}
+              sx={{
+                // Goofy, but it fixes the mobile view where cards
+                // are slightly askew right
+                paddingLeft: {
+                  xs: 0,
+                  sm: "16px"
+                }
+              }}
+            >
+              <Card raised>
                 <CardActionArea href={item.href} target="_blank">
                   <CardMedia
                     className={classes.cardMedia}
                     image={item.image}
                     title={item.alt}
+                    sx={{width: 300}}
                   />
                 </CardActionArea>
               </Card>
@@ -74,11 +89,8 @@ export default function Details() {
 
         </Grid>
 
-        <Box sx={{ my: 4 }}>
-          <Copyright />
-        </Box>
-
-      </Grid>
+        <Copyright />
+      </Stack>
     </Grid>
   );
 }
