@@ -1,4 +1,4 @@
-import { Button, ButtonGroup, Input, SvgIconTypeMap } from '@mui/material';
+import { Button, ButtonGroup, SvgIconTypeMap } from '@mui/material';
 import { useRouter } from 'next/router';
 import { Grid } from "@mui/material";
 
@@ -6,8 +6,7 @@ import CardGiftcardIcon from '@mui/icons-material/CardGiftcard';
 import PendingIcon from '@mui/icons-material/Pending';
 
 import { OverridableComponent } from '@mui/material/OverridableComponent';
-import { PhotoCamera } from '@mui/icons-material';
-import { ChangeEvent } from 'react';
+import { UploadPictureButton } from './UploadPictureButton';
 
 interface HeaderButtonConfig {
   name: string;
@@ -15,23 +14,7 @@ interface HeaderButtonConfig {
   icon?: OverridableComponent<SvgIconTypeMap<{}, "svg">> & { muiName: string; };
 };
 
-const uploadFile = (e: ChangeEvent<HTMLInputElement>) => {
-  if (e.target.files == null) {
-    e.target.files = new FileList();
-  }
 
-  for (let i = 0; i < e.target.files.length; i++) {
-    const f = e.target.files[i];
-    
-    // fetch("/test", {
-    //   method: "POST",
-    //   body: f
-    // })
-    // .then(resp => resp.json())
-    // .then(alert)
-    // .catch(console.error);
-  }
-}
 
 export default function HeaderButtons() {
   const path = useRouter().pathname;
@@ -65,10 +48,8 @@ export default function HeaderButtons() {
 
       <Grid item container xs justifyContent="flex-end">
         <ButtonGroup color="secondary" aria-label="" size="small">
-          <Button href="#" onClick={() => document.getElementById("upload")?.click()}>
-            <PhotoCamera />
-            <input type="file" accept=".jpg,.jpeg,.png,.gif,image/*" id="upload" onChange={uploadFile} hidden multiple />
-          </Button>
+          <UploadPictureButton />
+
           <Button href="#">
             {/* <LoginIcon /> */}
             <PendingIcon />
