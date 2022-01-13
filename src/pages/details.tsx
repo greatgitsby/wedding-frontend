@@ -20,8 +20,11 @@ export default function Details() {
   return (
     <Grid container justifyContent="center">
       <Stack
-        spacing={4}
+        spacing={3}
         justifyContent={"center"}
+
+        // Add additional spacing to bottom of site
+        marginBottom={3}
         sx={{
           maxWidth: {
             xs: "80vw",

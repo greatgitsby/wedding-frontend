@@ -5,7 +5,7 @@ import { Box } from '@mui/system';
 export default function Header() {
   return (
     <Stack
-      spacing={8}
+      spacing={3}
       sx={{
         width: {
           xs: "80vw",

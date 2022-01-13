@@ -1,6 +1,5 @@
 import Copyright from '../Footer';
-import PhotoPlug from '../PhotoPlug';
-import { Card, Grid, Stack, Theme } from '@mui/material';
+import { Card, Grid, Link, Stack, Typography } from '@mui/material';
 import { ImageList, ImageListItem } from '@mui/material';
 
 import { getImageProps } from '../Images';
@@ -10,11 +9,13 @@ import Header from '../Header';
 export default function Index(props: any) {
   const images = props.images;
 
-
   return (
     <Grid container justifyContent="center">
       <Stack
-        spacing={4}
+        spacing={3}
+
+        // Add additional spacing to bottom of site
+        marginBottom={3}
         sx={{
           maxWidth: {
             xs: "80vw",
@@ -43,13 +44,7 @@ export default function Index(props: any) {
                 justifyContent: "center",
               }}
             >
-              <Card raised
-                sx={{
-                  borderColor: (theme: Theme) => theme.palette.secondary.main,
-                  borderWidth: "2px",
-                  borderStyle: "solid"
-                }}
-              >
+              <Card raised>
                 <ImgixImage
                   src={image.src}
                   width={600}
@@ -62,7 +57,20 @@ export default function Index(props: any) {
           ))}
         </ImageList>
 
-        <PhotoPlug />
+        <Typography variant="subtitle1" align="center" fontFamily="Roboto">
+          {'Animation by '}
+          <Link color="inherit" href="https://www.instagram.com/fireflyavenuestudio/" target="_blank">
+            Emily Pulver
+          </Link>
+        </Typography>
+
+        <Typography variant="subtitle1" align="center" fontFamily="Roboto">
+          {'Photos by '}
+          <Link color="inherit" href="https://www.instagram.com/a.roley/" target="_blank">
+            Alex Roley
+          </Link>
+        </Typography>
+
         <Copyright />
 
       </Stack>
