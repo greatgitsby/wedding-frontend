@@ -34,7 +34,6 @@ export default function Index(props: any) {
             pointerEvents: "none"
           }}
           variant="quilted"
-          cols={2}
         >
           {images.map((image: any) => (
             <ImageListItem
@@ -44,12 +43,12 @@ export default function Index(props: any) {
                 justifyContent: "center",
               }}
             >
-              <Card raised>
+              <Card>
                 <ImgixImage
                   src={image.src}
-                  width={600}
-                  height={900}
-                  quality={25}
+                  width={1100}
+                  height={1300}
+                  quality={75}
                   fit={"crop"}
                 />
               </Card>

@@ -21,8 +21,8 @@ function CreateNewImgixLoader(
     const url = new URL(src);
 
     url.searchParams.set("auto", "format");
-    url.searchParams.set("w", (imageWidth*0.95).toString());
-    url.searchParams.set("h", (imageHeight*2.25).toString());
+    url.searchParams.set("w", imageWidth.toString());
+    url.searchParams.set("h", imageHeight.toString());
     url.searchParams.set("fit", fit);
     url.searchParams.set("quality", quality.toString() || (75).toString());
 
@@ -39,7 +39,7 @@ export default function ImgixImage({
 }: ImgixImageProps) {
 
   // Return closure of new image loader
-  const loader = CreateNewImgixLoader(height, width, fit);
+  const loader = CreateNewImgixLoader(width, height, fit);
 
   return (
     <Image
